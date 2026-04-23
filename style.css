@@ -118,8 +118,9 @@ img {
 }
 
 .btn-primary {
-  background: var(--blue);
-  color: #fff;
+padding: 14px 24px;
+  font-size: 16px;
+
 }
 
 .btn-accent {
