@@ -140,7 +140,7 @@ padding: 14px 24px;
     linear-gradient(90deg, rgba(29, 17, 48, 0.82) 0%, rgba(29, 17, 48, 0.68) 35%, rgba(29, 17, 48, 0.48) 55%, rgba(29, 17, 48, 0.38) 100%),
     url("img/hero.png");
   background-size: cover;
-  background-position: center 85%;
+  background-position: center 55%;
   background-repeat: no-repeat;
 }
 
@@ -209,6 +209,7 @@ padding: 14px 24px;
   display: grid;
   gap: 16px;
 }
+
 
 .video-section {
   padding: 30px 0;
