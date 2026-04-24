@@ -3,50 +3,45 @@ const certificados = [
     nombre: "Certificado de Número",
     plazo: "7 días hábiles",
     descripcion: "Acredita el número municipal asignado a una propiedad.",
-    documentos: ["Rol de avalúo", "Croquis de ubicación","Dominio Vigente","Copia Escritura"]
+    documentos: ["Rol de avalúo", "Croquis de ubicación","Dominio Vigente","Copia Escritura"],
+    formulario: "./img/Doc/cn.pdf"
   },
  
   {
     nombre: "Certificado de Informaciones Previas",
     plazo: "7 días hábiles",
     descripcion: "Entrega información urbanística aplicable a un predio.",
-    documentos: ["Rol de avalúo", "Croquis", "Poder simple si corresponde","Dominio Vigente","Copia Escritura"]
+    documentos: ["Rol de avalúo", "Croquis", "Poder simple si corresponde","Dominio Vigente","Copia Escritura"],
+    formulario: "./img/Doc/cip.pdf"
   },
   {
     nombre: "Certificado de Afectación a Utilidad Pública",
     plazo: "7 días hábiles",
     descripcion: "Certifica si una propiedad se encuentra afecta a utilidad pública según la planificación vigente.",
-    documentos: ["Rol de avalúo", "Croquis de ubicación","Dominio Vigente","Copia Escritura"]
+    documentos: ["Rol de avalúo", "Croquis de ubicación","Dominio Vigente","Copia Escritura"],
+    formulario: "./img/Doc/cup.pdf"
   },
    {
     nombre: "Certificado de Vivienda Social",
     plazo: "7 días hábiles",
     descripcion: "Permite acreditar antecedentes para fines asociados a vivienda social.",
-    documentos: ["Rol", "Antecedentes de la propiedad","Dominio Vigente","Copia Escritura"]
+    documentos: ["Rol", "Antecedentes de la propiedad","Dominio Vigente","Copia Escritura"],
+    formulario: "./img/Doc/formulario.pdf"
   },
   {
     nombre: "Certificado de Zonificación",
     plazo: "7 días hábiles",
     descripcion: "Informa la zonificación aplicable a un predio.",
-    documentos: ["Rol", "Dirección", "Croquis","Dominio Vigente","Copia Escritura"]
-  },
- 
-
-   {
-    nombre: "Certificado de Recepción Definitiva",
-    plazo: " 10 días hábiles",
-    descripcion: "Da cuenta de antecedentes asociados a la recepción definitiva de una obra.",
-    documentos: ["Antecedentes del expediente", "Resolución si aplica"]
-  },
- 
- 
-  
+    documentos: ["Rol", "Dirección", "Croquis","Dominio Vigente","Copia Escritura"],
+    formulario: "./img/Doc/formulario.pdf"
+  },     
  
   {
     nombre: "Otro",
     plazo: "Según revisión",
     descripcion: "Corresponde a solicitudes especiales no listadas explícitamente.",
-    documentos: ["Antecedentes según solicitud"]
+    documentos: ["Antecedentes según solicitud"],
+    formulario: "./img/Doc/formulario.pdf"
   }
 
 ];
@@ -85,11 +80,19 @@ function crearAcordeon() {
           </div>
         </div>
 
-        <div class="accordion-actions">
-          <a class="btn btn-primary" href="https://domenlinea.minvu.cl/" target="_blank">
-            Ir a DOM en Línea
-          </a>
-        </div>
+       <div class="accordion-actions">
+
+  <a class="btn btn-primary" href="https://domenlinea.minvu.cl/" target="_blank">
+    Ir a DOM en Línea
+  </a>
+
+  ${certificado.formulario ? `
+    <a class="btn btn-outline" href="${certificado.formulario}" target="_blank">
+      Ver formulario
+    </a>
+  ` : ""}
+
+</div>
       </div>
     `;
 
