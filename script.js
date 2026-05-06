@@ -4,7 +4,7 @@ const certificados = [
     plazo: "7 días hábiles",
     descripcion: "Acredita el número municipal asignado a una propiedad.",
     documentos: ["Rol de avalúo", "Croquis de ubicación","Dominio Vigente","Copia Escritura"],
-    formulario: "./img/Doc/cip.pdf"
+    formulario: "./img/Doc/formulario.pdf"
   },
  
   {
