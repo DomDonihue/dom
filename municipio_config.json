@@ -213,7 +213,7 @@
       "lote":                   { "x": 120, "y": 595, "size": 8,   "bold": false, "max": 12  },
       "localidad":              { "x": 180, "y": 595, "size": 8,   "bold": false, "max": 35  },
       "planoLoteo":             { "x": 412, "y": 595, "size": 8,   "bold": false, "max": 18  },
-      "rolSii":                 { "x": 512, "y": 585, "size": 8,   "bold": false, "max": 18  },
+      "rolSii":                 { "x": 512, "y": 595, "size": 8,   "bold": false, "max": 18  },
 
       "mapa":                   { "x": 55,  "y": 305, "width": 529, "height": 259            },
       "coordenadas":            { "x": 65,  "y": 312, "size": 8,   "bold": true,  "max": 80  },
