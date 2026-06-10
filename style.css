@@ -1307,12 +1307,39 @@ img {
 }
 
 .limites-info {
-  font-size: 0.85rem;
-  color: #9a3412;
-  background: #fff7ed;
+  font-size: 0.83rem;
+  color: #166534;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
   border-radius: 6px;
   padding: 6px 10px;
-  margin: 6px 0;
+  margin: 8px 0 6px;
+}
+
+.limites-info-pendiente {
+  font-size: 0.83rem;
+  color: #94a3b8;
+  margin: 6px 0 0;
+  font-style: italic;
+}
+
+/* Mini-mapa de previsualización de deslindes */
+.limites-minimap-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  margin: 10px 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.limites-minimap {
+  width: 100%;
+  height: 240px;
+  border-radius: 8px;
+  border: 2px solid #fca5a5;
+  overflow: hidden;
 }
 
 /* Botón pequeño extra */
@@ -1322,49 +1349,86 @@ img {
   min-height: 32px;
 }
 
-/* CONTROL URBANO / RURAL EN EL MAPA */
-.leaflet-zona-control {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 10px;
-  padding: 7px 10px;
+/* ZONA DETECTADA AUTOMÁTICAMENTE */
+.zona-detectada-panel {
   display: flex;
   align-items: center;
-  gap: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-  font-family: inherit;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 0.87rem;
+  font-weight: 500;
 }
 
-.zona-label {
-  font-size: 0.78rem;
+.zona-detectada-panel.zona-urbana {
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  color: #1d4ed8;
+}
+
+.zona-detectada-panel.zona-rural {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  color: #166534;
+}
+
+.zona-detectada-panel span { font-size: 1.1rem; }
+
+/* SELECTOR URBANO / RURAL INLINE (bajo el mapa) */
+.zona-selector-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.zona-selector-label {
+  font-size: 0.85rem;
   font-weight: 700;
-  color: #475569;
-  margin-right: 2px;
+  color: #0369a1;
+  flex-shrink: 0;
 }
 
-.zona-btn {
+.zona-inline-btn {
   border: 2px solid #cbd5e1;
   background: #f8fafc;
   color: #334155;
-  border-radius: 7px;
-  padding: 5px 12px;
-  font-size: 0.8rem;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.18s;
   white-space: nowrap;
 }
 
-.zona-btn:hover {
+.zona-inline-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
   background: #eff6ff;
 }
 
-.zona-btn.zona-activa {
+.zona-inline-btn.zona-inline-activa {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(47,118,234,0.3);
+  box-shadow: 0 2px 6px rgba(47,118,234,0.28);
+}
+
+/* Botón mover mapa en barra Leaflet.draw */
+.leaflet-mover-btn {
+  font-size: 1rem !important;
+  line-height: 26px !important;
+}
+
+.leaflet-mover-btn.mover-activo {
+  background: #e0edff !important;
 }
 
 /* Control de capas Leaflet en modo compacto */

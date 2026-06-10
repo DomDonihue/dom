@@ -28,6 +28,23 @@
       "sitioWeb": "https://mdonihue.cl/"
     }
   },
+  "hero": {
+    "eyebrow": "Dirección de Obras Municipales Doñihue",
+    "titulo": "DOM en Línea",
+    "subtitulo": "Trámites más simples, rápidos y seguros",
+    "descripcion": [
+      "DOM en Línea es la plataforma digital de la Dirección de Obras Municipales.",
+      "Permite gestionar certificados y trámites de manera rápida, segura y sin acudir presencialmente.",
+      "Aquí podrás revisar requisitos, documentos necesarios y plazos antes de ingresar al sistema oficial."
+    ],
+    "botonTexto": "Ingresar a DOM en Línea",
+    "botonUrl": "https://domenlinea.minvu.cl/",
+    "indicadores": [
+      { "icono": "⏱", "titulo": "Ahorra tiempo",      "descripcion": "Trámites más rápidos" },
+      { "icono": "💻", "titulo": "100% Online",        "descripcion": "Sin filas ni traslados" },
+      { "icono": "🛡", "titulo": "Seguro y confiable", "descripcion": "Plataforma oficial y segura" }
+    ]
+  },
   "mapa": {
     "comunaBusqueda": "Doñihue",
     "regionBusqueda": "Región del Libertador General Bernardo O'Higgins",
@@ -176,166 +193,57 @@
   "pdf": {
     "rutaBase": "./img/Doc/cip_base.pdf",
     "posiciones": {
-      "municipalidadSuperior": {
-        "x": 270,
-        "y": 820,
-        "size": 9,
-        "bold": true,
-        "max": 42
-      },
-      "regionSuperior": {
-        "x": 212,
-        "y": 789,
-        "size": 7,
-        "bold": false,
-        "max": 60
-      },
-      "marcaUrbano": {
-        "x": 209,
-        "y": 754,
-        "size": 13,
-        "bold": true,
-        "max": 1
-      },
-      "marcaRural": {
-        "x": 307,
-        "y": 754,
-        "size": 13,
-        "bold": true,
-        "max": 1
-      },
-      "nombre": {
-        "x": 60,
-        "y": 680,
-        "size": 8,
-        "bold": false,
-        "max": 55
-      },
-      "rut": {
-        "x": 338,
-        "y": 680,
-        "size": 8,
-        "bold": false,
-        "max": 20
-      },
-      "email": {
-        "x": 60,
-        "y": 655,
-        "size": 8,
-        "bold": false,
-        "max": 35
-      },
-      "telefono": {
-        "x": 238,
-        "y": 655,
-        "size": 8,
-        "bold": false,
-        "max": 18
-      },
-      "calle": {
-        "x": 60,
-        "y": 620,
-        "size": 8,
-        "bold": false,
-        "max": 55
-      },
-      "numero": {
-        "x": 356,
-        "y": 620,
-        "size": 8,
-        "bold": false,
-        "max": 12
-      },
-      "depto": {
-        "x": 432,
-        "y": 620,
-        "size": 8,
-        "bold": false,
-        "max": 12
-      },
-      "block": {
-        "x": 512,
-        "y": 620,
-        "size": 8,
-        "bold": false,
-        "max": 12
-      },
-      "manzana": {
-        "x": 60,
-        "y": 595,
-        "size": 8,
-        "bold": false,
-        "max": 12
-      },
-      "lote": {
-        "x": 120,
-        "y": 595,
-        "size": 8,
-        "bold": false,
-        "max": 12
-      },
-      "localidad": {
-        "x": 180,
-        "y": 595,
-        "size": 8,
-        "bold": false,
-        "max": 35
-      },
-      "planoLoteo": {
-        "x": 412,
-        "y": 595,
-        "size": 8,
-        "bold": false,
-        "max": 18
-      },
-      "rolSii": {
-        "x": 512,
-        "y": 585,
-        "size": 8,
-        "bold": false,
-        "max": 18
-      },
-      "mapa": {
-        "x": 55,
-        "y": 305,
-        "width": 529,
-        "height": 259
-      },
-      "coordenadas": {
-        "x": 65,
-        "y": 312,
-        "size": 8,
-        "bold": true,
-        "max": 80
-      },
-      "municipalidadComprobante": {
-        "x": 255,
-        "y": 190,
-        "size": 9,
-        "bold": true,
-        "max": 35
-      },
-      "calleComprobante": {
-        "x": 60,
-        "y": 116,
-        "size": 8,
-        "bold": false,
-        "max": 65
-      },
-      "numeroComprobante": {
-        "x": 500,
-        "y": 116,
-        "size": 8,
-        "bold": false,
-        "max": 15
-      },
-      "consentimientoPdf": {
-        "x": 55,
-        "y": 95,
-        "size": 6.5,
-        "bold": false,
-        "max": 120
-      }
+
+      "municipalidadSuperior":  { "x": 270, "y": 820, "size": 9,   "bold": true,  "max": 42  },
+      "regionSuperior":         { "x": 212, "y": 789, "size": 7,   "bold": false, "max": 60  },
+      "marcaUrbano":            { "x": 209, "y": 754, "size": 13,  "bold": true,  "max": 1   },
+      "marcaRural":             { "x": 307, "y": 754, "size": 13,  "bold": true,  "max": 1   },
+
+      "nombre":                 { "x": 60,  "y": 680, "size": 8,   "bold": false, "max": 55  },
+      "rut":                    { "x": 338, "y": 680, "size": 8,   "bold": false, "max": 20  },
+      "email":                  { "x": 60,  "y": 655, "size": 8,   "bold": false, "max": 35  },
+      "telefono":               { "x": 238, "y": 655, "size": 8,   "bold": false, "max": 18  },
+
+      "calle":                  { "x": 60,  "y": 620, "size": 8,   "bold": false, "max": 55  },
+      "numero":                 { "x": 356, "y": 620, "size": 8,   "bold": false, "max": 12  },
+      "depto":                  { "x": 432, "y": 620, "size": 8,   "bold": false, "max": 12  },
+      "block":                  { "x": 512, "y": 620, "size": 8,   "bold": false, "max": 12  },
+
+      "manzana":                { "x": 60,  "y": 595, "size": 8,   "bold": false, "max": 12  },
+      "lote":                   { "x": 120, "y": 595, "size": 8,   "bold": false, "max": 12  },
+      "localidad":              { "x": 180, "y": 595, "size": 8,   "bold": false, "max": 35  },
+      "planoLoteo":             { "x": 412, "y": 595, "size": 8,   "bold": false, "max": 18  },
+      "rolSii":                 { "x": 512, "y": 585, "size": 8,   "bold": false, "max": 18  },
+
+      "mapa":                   { "x": 55,  "y": 305, "width": 529, "height": 259            },
+      "coordenadas":            { "x": 65,  "y": 312, "size": 8,   "bold": true,  "max": 80  },
+
+      "municipalidadComprobante": { "x": 255, "y": 190, "size": 9, "bold": true,  "max": 35  },
+      "calleComprobante":       { "x": 60,  "y": 116, "size": 8,   "bold": false, "max": 65  },
+      "numeroComprobante":      { "x": 500, "y": 116, "size": 8,   "bold": false, "max": 15  },
+      "consentimientoPdf":      { "x": 55,  "y": 95,  "size": 6.5, "bold": false, "max": 120 }
+    }
+  },
+  "formulario": {
+    "tituloSolicitante": "Datos del solicitante",
+    "tituloPropiedad": "Datos de la propiedad",
+    "ayudaPropiedad": "Estos datos se completan desde el mapa. Revísalos y corrige manualmente si la dirección no queda exacta.",
+    "campos": {
+      "nombre":     { "label": "Nombre completo",    "placeholder": "Ej: Juan Pérez González" },
+      "rut":        { "label": "RUT",                "placeholder": "Ej: 12.345.678-9" },
+      "email":      { "label": "E-mail",             "placeholder": "correo@ejemplo.cl" },
+      "telefono":   { "label": "Teléfono",           "placeholder": "Ej: 9 1234 5678" },
+      "zona":       { "label": "Tipo de zona" },
+      "calle":      { "label": "Calle o camino",     "placeholder": "Se completará desde el mapa" },
+      "numero":     { "label": "Número",             "placeholder": "Se completará si el mapa lo encuentra" },
+      "sinNumero":  { "label": "Predio sin número / S.N." },
+      "depto":      { "label": "Departamento",       "placeholder": "Opcional" },
+      "block":      { "label": "Block",              "placeholder": "Opcional" },
+      "manzana":    { "label": "Manzana",            "placeholder": "Opcional" },
+      "lote":       { "label": "Lote",               "placeholder": "Opcional" },
+      "localidad":  { "label": "Loteo o localidad",  "placeholder": "Se completará desde el mapa" },
+      "planoLoteo": { "label": "Plano de loteo N°",  "placeholder": "Opcional" },
+      "rolSii":     { "label": "Rol SII",            "placeholder": "Ej: 123-45" }
     }
   },
   "consentimiento": {

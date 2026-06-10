@@ -41,48 +41,20 @@
 
     <div class="container hero-grid">
       <div class="hero-left">
-        <span class="eyebrow">Dirección de Obras Municipales Doñihue</span>
-        <h1>DOM en Línea</h1>
-        <h2>Trámites más simples, rápidos y seguros</h2>
-        <p>
-         DOM en Línea es la plataforma digital de la Dirección de Obras Municipales que permite a vecinos y contribuyentes gestionar certificados y trámites de manera rápida, segura y sin necesidad de acudir presencialmente.
-Aquí podrás revisar requisitos, documentos necesarios y plazos antes de ingresar al sistema oficial.
-        </p>
+        <span class="eyebrow" id="heroEyebrow"></span>
+        <h1 id="heroTitulo"></h1>
+        <h2 id="heroSubtitulo"></h2>
+        <p id="heroDescripcion"></p>
 
         <div class="hero-actions">
-          <a class="btn btn-accent btn-lg" href="https://domenlinea.minvu.cl/" target="_blank">
+          <a class="btn btn-accent btn-lg" id="heroBoton" href="https://domenlinea.minvu.cl/" target="_blank">
             Ingresar a DOM en Línea
           </a>
         </div>
       </div>
 
       <div class="hero-right">
-        <div class="hero-indicators">
-          <div class="indicator-card">
-            <div class="indicator-icon">⏱</div>
-            <div>
-              <strong>Ahorra tiempo</strong>
-              <p>Trámites más rápidos</p>
-            </div>
-          </div>
-
-          <div class="indicator-card">
-            <div class="indicator-icon">💻</div>
-            <div>
-              <strong>100% Online</strong>
-              <p>Sin filas ni traslados</p>
-            </div>
-          </div>
-
-          <div class="indicator-card">
-            <div class="indicator-icon">🛡</div>
-            <div>
-              <strong>Seguro y confiable</strong>
-              <p>Plataforma oficial y segura</p>
-            </div>
-          </div>
-        </div>
-        
+        <div class="hero-indicators" id="heroIndicadores"></div>
       </div>
     </div>
   </section>
@@ -202,18 +174,32 @@ Aquí podrás revisar requisitos, documentos necesarios y plazos antes de ingres
           <strong>Coordenadas seleccionadas:</strong>
           <p id="coordenadasTexto">Aún no se ha seleccionado una ubicación.</p>
           <p id="estadoUbicacion" class="estado-flujo pendiente">Seleccione una ubicación para continuar con el formulario.</p>
+
         </div>
 
         <div class="limites-box" id="limitesBox">
           <div class="limites-header">
             <span class="limites-icon">⬡</span>
-            <strong>Límites del predio</strong>
+            <strong>Deslindes del predio</strong>
             <span class="limites-badge sin-limites" id="limitesBadge">Sin demarcar</span>
           </div>
-          <p class="limites-ayuda">Use la herramienta <strong>Polígono</strong> o <strong>Rectángulo</strong> de la barra lateral del mapa para demarcar los límites del predio. Puede editar o eliminar el trazado.</p>
-          <p id="limitesTexto" class="limites-info" style="display:none"></p>
+          <p class="limites-ayuda">Use la herramienta <strong>Polígono</strong> o <strong>Rectángulo</strong> de la barra lateral del mapa para demarcar los deslindes del predio.</p>
+
+          <!-- Mini-mapa de previsualización de deslindes -->
+          <div id="limitesMiniMapaWrap" style="display:none">
+            <div class="limites-minimap-label">
+              <span>📐</span> Vista previa de deslindes demarcados
+            </div>
+            <div id="limitesMiniMapa" class="limites-minimap"></div>
+            <p id="limitesTexto" class="limites-info"></p>
+          </div>
+
+          <div class="limites-footer" id="limitesSinDemarcar">
+            <p id="limitesTextoPendiente" class="limites-info-pendiente">Aún no se han demarcado los deslindes en el mapa.</p>
+          </div>
+
           <button type="button" class="btn btn-outline btn-sm" id="btnLimpiarLimites" style="display:none">
-            Borrar límites
+            🗑 Borrar deslindes
           </button>
         </div>
 
