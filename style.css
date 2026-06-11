@@ -977,6 +977,22 @@ img {
   line-height: 1.5;
 }
 
+.footer-minvu {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  margin-top: 24px;
+  padding-top: 20px;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-minvu-logo {
+  height: 56px;
+  width: auto;
+  opacity: 0.92;
+  filter: brightness(0) invert(1);
+}
+
 /* RESPONSIVE */
 @media (max-width: 1100px) {
   .menu {

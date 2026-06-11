@@ -381,15 +381,26 @@ function iniciarMapaPredio() {
   mapaPredio.addControl(new ControlMover());
 
   /* ── Eventos de dibujo ──────────────────────────────────────── */
-  mapaPredio.on(L.Draw.Event.CREATED, function (e) {
-    /* Solo un polígono a la vez: limpiar antes de agregar */
+  mapaPredio.on(L.Draw.Event.CREATED, async function (e) {
     drawnItems.clearLayers();
     drawnItems.addLayer(e.layer);
     guardarLimitesPropiedad();
+
+    /* Mover el pin automáticamente al centro del polígono dibujado */
+    const centro = e.layer.getBounds().getCenter();
+    actualizarUbicacionPredio(centro.lat, centro.lng, "Ubicación centrada en el dibujo");
+    await completarDireccionPorCoordenadas(centro.lat, centro.lng);
   });
 
-  mapaPredio.on(L.Draw.Event.EDITED, function () {
+  mapaPredio.on(L.Draw.Event.EDITED, async function () {
     guardarLimitesPropiedad();
+
+    /* Recalcular el pin al nuevo centro si el polígono fue editado */
+    if (drawnItems.getLayers().length > 0) {
+      const centro = drawnItems.getLayers()[0].getBounds().getCenter();
+      actualizarUbicacionPredio(centro.lat, centro.lng, "Ubicación actualizada al editar el dibujo");
+      await completarDireccionPorCoordenadas(centro.lat, centro.lng);
+    }
   });
 
   mapaPredio.on(L.Draw.Event.DELETED, function () {
@@ -399,8 +410,15 @@ function iniciarMapaPredio() {
 
   /* ── Clic para marcar punto de ubicación ────────────────────── */
   mapaPredio.on("click", async function (event) {
-    /* Ignorar clics sobre los controles de dibujo */
     if (mapaPredio._drawingMode) return;
+
+    /* Si ya hay un polígono dibujado, el pin siempre vuelve a su centro */
+    if (drawnItems && drawnItems.getLayers().length > 0) {
+      const centro = drawnItems.getLayers()[0].getBounds().getCenter();
+      actualizarUbicacionPredio(centro.lat, centro.lng, "Ubicación fijada al polígono demarcado");
+      return;
+    }
+
     const lat = event.latlng.lat;
     const lng = event.latlng.lng;
     actualizarUbicacionPredio(lat, lng, "Punto marcado en el mapa");
@@ -1226,6 +1244,7 @@ async function generarPdfCip(imprimir = false) {
       if (ventana) {
         ventana.onload = function () {
           ventana.print();
+          ventana.onafterprint = function () { limpiarFormulario(); };
         };
       }
     } else {
@@ -1235,12 +1254,57 @@ async function generarPdfCip(imprimir = false) {
       document.body.appendChild(enlace);
       enlace.click();
       document.body.removeChild(enlace);
+      setTimeout(limpiarFormulario, 1500);
     }
 
   } catch (error) {
     console.error(error);
     alert("No se pudo generar el PDF. Revise la ruta del PDF base en municipio_config.json y confirme que el archivo exista en img/Doc.");
   }
+}
+
+function limpiarFormulario() {
+  /* Campos de texto y ocultos */
+  const campos = [
+    "nombre", "rut", "email", "telefono",
+    "calle", "numero", "depto", "block",
+    "manzana", "lote", "localidad", "planoLoteo", "rolSii",
+    "latitud", "longitud", "limitesPropiedad"
+  ];
+  campos.forEach(function (id) {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+
+  /* Select y checkboxes */
+  const zona = document.getElementById("zona");
+  if (zona) zona.selectedIndex = 0;
+
+  const sinNum = document.getElementById("sinNumero");
+  if (sinNum) sinNum.checked = false;
+
+  const consent = document.getElementById("consentimientoDatos");
+  if (consent) consent.checked = false;
+
+  /* Textos de estado */
+  const coordTexto = document.getElementById("coordenadasTexto");
+  if (coordTexto) coordTexto.textContent = "Aún no se ha seleccionado una ubicación.";
+
+  /* Marcador y polígono del mapa */
+  if (marcadorPredio && mapaPredio) {
+    mapaPredio.removeLayer(marcadorPredio);
+    marcadorPredio = null;
+  }
+  if (drawnItems) drawnItems.clearLayers();
+
+  /* Mini-mapa de deslindes */
+  actualizarInfoLimites(null);
+
+  /* Indicadores de paso */
+  actualizarPaso("pasoUbicacion", "activo");
+  actualizarPaso("pasoFormulario", "");
+  actualizarPaso("pasoPdf", "");
+  actualizarEstadoUbicacion();
 }
 
 
