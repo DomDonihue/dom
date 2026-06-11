@@ -216,7 +216,7 @@
       "rolSii":                 { "x": 512, "y": 595, "size": 8,   "bold": false, "max": 18  },
 
       "mapa":                   { "x": 55,  "y": 305, "width": 529, "height": 259            },
-      "coordenadas":            { "x": 65,  "y": 312, "size": 8,   "bold": true,  "max": 80  },
+      "coordenadas":            { "x": 65,  "y": 293, "size": 7.5, "bold": true,  "max": 80  },
 
       "municipalidadComprobante": { "x": 255, "y": 190, "size": 9, "bold": true,  "max": 35  },
       "calleComprobante":       { "x": 60,  "y": 116, "size": 8,   "bold": false, "max": 65  },
