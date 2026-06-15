@@ -44,7 +44,7 @@
 
   "hero": {
     "_info": "Contenido de la sección principal (banner superior de la página).",
-    "eyebrow": "Dirección de Obras Municipales Doñihue",    
+    "eyebrow": "Dirección de Obras Municipales ",    
     "titulo": "DOM en Línea", 
     "subtitulo": "Trámites más simples, rápidos y seguros",
     
@@ -95,7 +95,7 @@
         "Dominio Vigente",
         "Copia Escritura"
       ],
-      "formulario": "./img/doc/formulario.pdf"
+      "formulario": "./img/Doc/cn.pdf"
     },
     {
       "nombre": "Certificado de Informaciones Previas",
@@ -108,7 +108,7 @@
         "Dominio Vigente",
         "Copia Escritura"
       ],
-      "formulario": "./img/doc/cip.pdf"
+      "formulario": "./img/Doc/cip.pdf"
     },
     {
       "nombre": "Certificado de Afectación a Utilidad Pública",
@@ -120,7 +120,7 @@
         "Dominio Vigente",
         "Copia Escritura"
       ],
-      "formulario": "./img/doc/cup.pdf"
+      "formulario": "./img/Doc/cup.pdf"
     },
     {
       "nombre": "Certificado de Vivienda Social",
@@ -132,7 +132,7 @@
         "Dominio Vigente",
         "Copia Escritura"
       ],
-      "formulario": "./img/doc/formulario.pdf"
+      "formulario": "./img/Doc/formulario.pdf"
     },
     {
       "nombre": "Certificado de Zonificación",
@@ -145,7 +145,7 @@
         "Dominio Vigente",
         "Copia Escritura"
       ],
-      "formulario": "./img/doc/formulario.pdf"
+      "formulario": "./img/Doc/formulario.pdf"
     },
     {
       "nombre": "Otro",
@@ -154,7 +154,7 @@
       "documentos": [
         "Antecedentes según solicitud"
       ],
-      "formulario": "./img/doc/formulario.pdf"
+      "formulario": "./img/Doc/formulario.pdf"
     }
   ],
 
@@ -167,7 +167,7 @@
       "color": "purple",
       "descripcion": "Espacio para publicar material informativo descargable.",
       "labelBoton": "Ver tríptico",
-      "url": "./img/doc/Pasoapaso.pdf",
+      "url": "./img/Doc/Pasoapaso.pdf",
       "externo": true
     },
     {
@@ -222,7 +222,7 @@
 
   "pdf": {
     "_info": "Configuración del formulario PDF generado al completar la solicitud.",
-    "rutaBase": "./img/doc/cip_base.pdf",
+    "rutaBase": "./img/Doc/cip_base.pdf",
    
     "posiciones": {
       "_info": "Posiciones de cada campo dentro del PDF base. Solo modificar si se cambia la plantilla PDF (cip_base.pdf).",
