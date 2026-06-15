@@ -115,15 +115,17 @@ function obtenerLocalidadDesdeAddress(address = {}) {
  * - city / town / suburb / neighbourhood / quarter → urbano
  * - village / hamlet / farm / isolated_dwelling     → rural
  */
-function detectarZonaDesdeAddress(address = {}) {
+function detectarZonaDesdeAddress(address = {}, placeRank = null) {
   const indicadoresUrbano = [
     address.city, address.town, address.suburb,
     address.neighbourhood, address.quarter,
-    address.industrial, address.commercial, address.residential
+    address.industrial, address.commercial, address.residential,
+    address.allotments, address.retail
   ];
   const indicadoresRural = [
     address.village, address.hamlet, address.farm,
-    address.farmyard, address.isolated_dwelling, address.locality
+    address.farmyard, address.isolated_dwelling, address.locality,
+    address.municipality
   ];
 
   const esUrbano = indicadoresUrbano.some(Boolean);
@@ -131,10 +133,15 @@ function detectarZonaDesdeAddress(address = {}) {
 
   if (esUrbano) return "urbano";
   if (esRural)  return "rural";
-  return "";   // no determinado
+
+  /* Fallback: place_rank ≤ 16 = ciudad/pueblo (urbano), > 16 = rural */
+  if (placeRank !== null) {
+    return placeRank <= 16 ? "urbano" : "rural";
+  }
+  return "";
 }
 
-function autocompletarDireccionFormulario(address = {}, textoBusqueda = "") {
+function autocompletarDireccionFormulario(address = {}, textoBusqueda = "", placeRank = null) {
   const calle = limpiarCalle(
     address.road ||
     address.pedestrian ||
@@ -147,7 +154,7 @@ function autocompletarDireccionFormulario(address = {}, textoBusqueda = "") {
 
   const numero    = address.house_number || extraerNumeroDireccion(textoBusqueda);
   const localidad = obtenerLocalidadDesdeAddress(address);
-  const zonaDetectada = detectarZonaDesdeAddress(address);
+  const zonaDetectada = detectarZonaDesdeAddress(address, placeRank);
 
   asignarValor("calle", calle, true);
 
@@ -656,6 +663,8 @@ async function completarDireccionPorCoordenadas(lat, lng) {
     lat: String(lat),
     lon: String(lng),
     addressdetails: "1",
+    extratags: "1",
+    zoom: "18",
     "accept-language": "es"
   });
 
@@ -668,7 +677,7 @@ async function completarDireccionPorCoordenadas(lat, lng) {
     const datos = await respuesta.json();
 
     if (datos && datos.address) {
-      autocompletarDireccionFormulario(datos.address, datos.display_name || "");
+      autocompletarDireccionFormulario(datos.address, datos.display_name || "", datos.place_rank);
     }
   } catch (error) {
     console.warn("No se pudo autocompletar la dirección desde el mapa.", error);
