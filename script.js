@@ -251,30 +251,16 @@ function iniciarMapaPredio() {
   /* ── Capas base ─────────────────────────────────────────────── */
 
   /* 1. Solo satélite (base) */
-  const imgSatelite = L.tileLayer(
-    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  /* Satélite + etiquetas Google (mejor resolución para Chile) */
+  const capaHibrido = L.tileLayer(
+    "https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
     {
-      maxNativeZoom: 19,
-      maxZoom: 20,
-      attribution: "Tiles &copy; Esri — Esri, Maxar, GeoEye, USDA, USGS, AeroGRID, IGN",
-      crossOrigin: true
+      subdomains: ["0", "1", "2", "3"],
+      maxNativeZoom: 21,
+      maxZoom: 21,
+      attribution: "Tiles &copy; Google"
     }
   );
-
-  /* 2. Overlay: trazado de calles y rutas (líneas) */
-  const ovTransporte = L.tileLayer(
-    "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
-    { maxNativeZoom: 19, maxZoom: 20, opacity: 0.9, crossOrigin: true }
-  );
-
-  /* 3. Overlay: nombres de calles, localidades y límites */
-  const ovEtiquetas = L.tileLayer(
-    "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-    { maxNativeZoom: 19, maxZoom: 20, opacity: 1, crossOrigin: true }
-  );
-
-  /* Híbrido = satélite + calles + etiquetas */
-  const capaHibrido = L.layerGroup([imgSatelite, ovTransporte, ovEtiquetas]);
 
   /* Mapa de calles OSM (alternativa) */
   const capaCalles = L.tileLayer(
@@ -516,18 +502,8 @@ function actualizarInfoLimites(feature) {
       });
 
       L.tileLayer(
-        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-        { maxNativeZoom: 19, maxZoom: 20, crossOrigin: true }
-      ).addTo(miniMapa);
-
-      L.tileLayer(
-        "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
-        { maxNativeZoom: 19, maxZoom: 20, opacity: 0.8, crossOrigin: true }
-      ).addTo(miniMapa);
-
-      L.tileLayer(
-        "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-        { maxNativeZoom: 19, maxZoom: 20, crossOrigin: true }
+        "https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+        { subdomains: ["0","1","2","3"], maxNativeZoom: 21, maxZoom: 21 }
       ).addTo(miniMapa);
     }
 
