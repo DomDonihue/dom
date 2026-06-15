@@ -408,15 +408,30 @@ function iniciarMapaPredio() {
     actualizarInfoLimites(null);
   });
 
+  /* Al activar polígono o rectángulo: limpiar pin y campos de ubicación anteriores */
+  mapaPredio.on(L.Draw.Event.DRAWSTART, function () {
+    if (marcadorPredio && mapaPredio) {
+      mapaPredio.removeLayer(marcadorPredio);
+      marcadorPredio = null;
+    }
+    ["calle","numero","localidad","latitud","longitud","limitesPropiedad"].forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) el.value = "";
+    });
+    const coordTexto = document.getElementById("coordenadasTexto");
+    if (coordTexto) coordTexto.textContent = "Aún no se ha seleccionado una ubicación.";
+    actualizarInfoLimites(null);
+  });
+
   /* ── Clic para marcar punto de ubicación ────────────────────── */
   mapaPredio.on("click", async function (event) {
     if (mapaPredio._drawingMode) return;
 
-    /* Si ya hay un polígono dibujado, el pin siempre vuelve a su centro */
+    /* Si había un polígono dibujado, se borra para dejar solo el pin */
     if (drawnItems && drawnItems.getLayers().length > 0) {
-      const centro = drawnItems.getLayers()[0].getBounds().getCenter();
-      actualizarUbicacionPredio(centro.lat, centro.lng, "Ubicación fijada al polígono demarcado");
-      return;
+      drawnItems.clearLayers();
+      document.getElementById("limitesPropiedad").value = "";
+      actualizarInfoLimites(null);
     }
 
     const lat = event.latlng.lat;
