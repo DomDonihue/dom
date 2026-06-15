@@ -408,12 +408,14 @@ function iniciarMapaPredio() {
     actualizarInfoLimites(null);
   });
 
-  /* Al activar polígono o rectángulo: limpiar pin y campos de ubicación anteriores */
+  /* Al activar polígono o rectángulo: limpiar pin, búsqueda y campos de ubicación anteriores */
   mapaPredio.on(L.Draw.Event.DRAWSTART, function () {
     if (marcadorPredio && mapaPredio) {
       mapaPredio.removeLayer(marcadorPredio);
       marcadorPredio = null;
     }
+    const inputBuscar = document.getElementById("buscarDireccion");
+    if (inputBuscar) inputBuscar.value = "";
     ["calle","numero","localidad","latitud","longitud","limitesPropiedad"].forEach(function(id) {
       const el = document.getElementById(id);
       if (el) el.value = "";
