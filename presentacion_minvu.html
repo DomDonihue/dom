@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentación MINVU — Portal DOM en Línea Municipal</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --rojo:    #c0392b;
+      --rojo2:   #922b21;
+      --azul:    #1a3a6b;
+      --azul2:   #0f2547;
+      --dorado:  #d4ac0d;
+      --blanco:  #ffffff;
+      --gris:    #f4f6f9;
+      --texto:   #1c2833;
+      --verde:   #1e8449;
+      --verde2:  #27ae60;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--azul2);
+      color: var(--blanco);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      height: 58px;
+      background: rgba(0,0,0,0.4);
+      border-bottom: 2px solid var(--rojo);
+      flex-shrink: 0;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .flag-cl {
+      width: 32px;
+      height: 22px;
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .flag-top { display:flex; flex:1; }
+    .flag-blue { background:#003399; flex:1; }
+    .flag-white-top { background:#fff; flex:2; position:relative; }
+    .flag-red  { background:#cc0000; flex:1; width:100%; }
+    .flag-star { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#003399; font-size:10px; line-height:1; }
+
+    .topbar-titles { line-height: 1.2; }
+    .topbar-main { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.95); letter-spacing:0.3px; }
+    .topbar-sub  { font-size: 10px; color: rgba(255,255,255,0.45); letter-spacing: 1.5px; text-transform:uppercase; }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .badge-minvu {
+      background: var(--rojo);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    #slide-counter {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress-wrap {
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    #progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rojo), var(--dorado));
+      transition: width 0.4s ease;
+    }
+
+    /* ===== SLIDES ===== */
+    .slides-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 60px;
+      animation: fadeSlide 0.45s ease;
+    }
+    .slide.active { display: flex; }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateX(24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ===== SLIDE LAYOUTS ===== */
+    .slide-center {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .slide-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .slide-wide {
+      flex-direction: column;
+      width: 100%;
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    /* ===== TIPOGRAFÍA ===== */
+    .kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 10px;
+    }
+
+    .slide-title {
+      font-size: 40px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .slide-title .hl { color: var(--dorado); }
+    .slide-title .hl-red { color: #e74c3c; }
+
+    .slide-body {
+      font-size: 17px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    .slide-body strong { color: rgba(255,255,255,0.95); }
+
+    /* ===== CARDS ===== */
+    .cards-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 20px 22px;
+      flex: 1;
+      min-width: 160px;
+      max-width: 220px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); background: rgba(255,255,255,0.12); }
+
+    .card-icon { font-size: 30px; margin-bottom: 10px; }
+    .card-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+    .card-desc  { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    /* ===== DETAIL GRID ===== */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .detail-item {
+      background: rgba(255,255,255,0.06);
+      border-left: 3px solid var(--dorado);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+    }
+    .detail-item.red { border-color: #e74c3c; }
+    .detail-item.green { border-color: var(--verde2); }
+
+    .detail-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 4px;
+    }
+    .detail-item.red .detail-label   { color: #e74c3c; }
+    .detail-item.green .detail-label { color: var(--verde2); }
+
+    .detail-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+    }
+
+    /* ===== FLOW ===== */
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .flow-node {
+      background: rgba(255,255,255,0.09);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-align: center;
+      min-width: 100px;
+    }
+    .flow-node.highlight {
+      background: rgba(212,172,13,0.15);
+      border-color: var(--dorado);
+    }
+    .flow-node.minvu {
+      background: rgba(192,57,43,0.2);
+      border-color: #e74c3c;
+    }
+
+    .flow-num { font-size: 10px; color: var(--dorado); font-weight:700; letter-spacing:1px; margin-bottom:4px; }
+    .flow-node.minvu .flow-num { color: #e74c3c; }
+    .flow-label { font-size: 12px; font-weight: 600; line-height: 1.3; }
+
+    .flow-arrow { font-size: 20px; color: rgba(255,255,255,0.3); margin: 0 6px; }
+
+    /* ===== PROBLEMA BOX ===== */
+    .problema-box {
+      background: rgba(192,57,43,0.12);
+      border: 1px solid rgba(192,57,43,0.3);
+      border-radius: 14px;
+      padding: 22px 26px;
+    }
+
+    .solucion-box {
+      background: rgba(30,132,73,0.12);
+      border: 1px solid rgba(39,174,96,0.3);
+      border-radius: 14px;
+      padding: 22px 26px;
+    }
+
+    .box-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .problema-box .box-title { color: #e74c3c; }
+    .solucion-box .box-title { color: var(--verde2); }
+
+    .box-list { list-style: none; }
+    .box-list li {
+      font-size: 14px;
+      color: rgba(255,255,255,0.78);
+      padding: 5px 0;
+      display: flex;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .box-list li::before { content: attr(data-icon); flex-shrink:0; }
+
+    /* ===== STAT CHIPS ===== */
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stat-chip {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 12px;
+      padding: 16px 22px;
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .stat-num  { font-size: 32px; font-weight: 900; color: var(--dorado); }
+    .stat-label{ font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+    /* ===== SCREENSHOT MOCK ===== */
+    .screen-mock {
+      background: #1a1a2e;
+      border: 2px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .screen-bar {
+      background: rgba(255,255,255,0.06);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .screen-dot { width:10px;height:10px;border-radius:50%; }
+    .screen-url {
+      flex:1; background:rgba(255,255,255,0.05); border-radius:4px;
+      padding: 3px 10px; font-size:10px; color:rgba(255,255,255,0.3);
+      margin: 0 8px;
+    }
+
+    .screen-body { padding: 18px; }
+    .screen-section { margin-bottom: 12px; }
+    .screen-title { font-size: 10px; font-weight:700; color: var(--dorado); margin-bottom:6px; }
+    .screen-row { display:flex; gap:6px; flex-wrap:wrap; }
+    .screen-chip {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius:6px; padding:4px 10px;
+      font-size:10px; color:rgba(255,255,255,0.6);
+    }
+    .screen-chip.active { background:rgba(212,172,13,0.15); border-color:var(--dorado); color:var(--dorado); }
+    .screen-map {
+      background: linear-gradient(135deg, #1a3a1a 0%, #2d5a2d 50%, #1a3a1a 100%);
+      border-radius:8px;
+      height:80px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+      position:relative;
+    }
+    .map-pin {
+      position:absolute;
+      font-size:20px;
+      top:30%;
+      left:52%;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-5px); }
+    }
+    .screen-form { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px; }
+    .screen-field {
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:5px; padding:5px 8px;
+      font-size:9px; color:rgba(255,255,255,0.4);
+    }
+    .screen-btn {
+      background: rgba(212,172,13,0.2);
+      border: 1px solid var(--dorado);
+      color: var(--dorado);
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 9px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    /* ===== BG ===== */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at 15% 40%, #1a3a6b 0%, #0f2547 55%, #06091a 100%);
+    }
+
+    /* Partículas */
+    .bg-particles { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+    .prt {
+      position:absolute; border-radius:50%;
+      background:rgba(212,172,13,0.05);
+      animation: pfloat linear infinite;
+    }
+    @keyframes pfloat {
+      from { transform:translateY(100vh); opacity:0; }
+      10%  { opacity:1; }
+      90%  { opacity:0.4; }
+      to   { transform:translateY(-20vh); opacity:0; }
+    }
+
+    /* ===== BOTTOMBAR ===== */
+    .bottombar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+      background: rgba(0,0,0,0.35);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+
+    .dots {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active { background: var(--dorado); width: 18px; border-radius: 4px; }
+    .dot:hover  { background: rgba(255,255,255,0.5); }
+
+    .nav-group { display:flex; gap:8px; }
+
+    .btn-n {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-n:hover   { background: rgba(255,255,255,0.16); }
+    .btn-n:disabled{ opacity:0.25; cursor:default; }
+    .btn-n.primary { background: var(--rojo); border-color: var(--rojo); }
+    .btn-n.primary:hover { background: #a93226; }
+
+    .slide-info { font-size:11px; color:rgba(255,255,255,0.35); }
+
+    /* Portada especial */
+    .portada-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .logo-badge {
+      width: 64px; height: 64px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+    .logo-badge.gov { background: linear-gradient(135deg, #c0392b, #922b21); }
+    .logo-badge.mun { background: linear-gradient(135deg, #1a3a6b, #0f2547); border: 1.5px solid rgba(255,255,255,0.15); }
+
+    .logo-divider { width:1px; height:50px; background:rgba(255,255,255,0.15); }
+
+    .portada-title { font-size: 50px; font-weight: 900; line-height: 1.05; margin-bottom: 12px; }
+    .portada-sub   { font-size: 20px; font-weight: 400; color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+
+    .portada-tags {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .ptag {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Cita destacada */
+    .quote-box {
+      background: rgba(212,172,13,0.08);
+      border-left: 4px solid var(--dorado);
+      border-radius: 0 12px 12px 0;
+      padding: 18px 22px;
+      margin-top: 20px;
+      max-width: 700px;
+    }
+    .quote-text { font-size: 16px; font-style: italic; color: rgba(255,255,255,0.85); line-height: 1.6; }
+    .quote-src  { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px; }
+
+    /* Escalabilidad */
+    .escala-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+      width: 100%;
+    }
+    .escala-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .escala-icon { font-size: 28px; margin-bottom: 8px; }
+    .escala-title { font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+    .escala-desc  { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* Pill de sección */
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(192,57,43,0.18);
+      border: 1px solid rgba(192,57,43,0.35);
+      color: #e74c3c;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-particles" id="particles"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="flag-cl">
+      <div class="flag-top">
+        <div class="flag-blue"></div>
+        <div class="flag-white-top"><span class="flag-star">★</span></div>
+      </div>
+      <div class="flag-red"></div>
+    </div>
+    <div class="topbar-titles">
+      <div class="topbar-main">Portal DOM en Línea — Propuesta Municipal</div>
+      <div class="topbar-sub">I. Municipalidad de Doñihue · Dirección de Obras Municipales</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="badge-minvu">MINVU 2026</span>
+    <span id="slide-counter">1 / 11</span>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div id="progress-fill" style="width:0%"></div>
+</div>
+
+<!-- ===================== SLIDES ===================== -->
+<div class="slides-container">
+
+  <!-- 0 · PORTADA -->
+  <div class="slide slide-center active" id="slide-0">
+    <div class="portada-logo-row">
+      <div class="logo-badge gov">🏛</div>
+      <div class="logo-divider"></div>
+      <div class="logo-badge mun">🏗</div>
+    </div>
+    <div class="kicker">Propuesta de innovación digital</div>
+    <div class="portada-title">Portal Ciudadano<br><span style="color:var(--dorado)">DOM en Línea</span></div>
+    <div class="portada-sub">Orientación municipal integrada a la plataforma nacional del MINVU</div>
+    <div class="portada-tags">
+      <span class="ptag">🏛 Municipalidad de Doñihue</span>
+      <span class="ptag">📋 DOM en Línea MINVU</span>
+      <span class="ptag">🗺 Mapa interactivo</span>
+      <span class="ptag">📄 Generación de PDF</span>
+      <span class="ptag">🔄 Replicable en todo Chile</span>
+    </div>
+  </div>
+
+  <!-- 1 · CONTEXTO -->
+  <div class="slide slide-center" id="slide-1">
+    <div class="kicker">El escenario actual</div>
+    <div class="slide-title">¿Cuál es el <span class="hl">desafío</span>?</div>
+    <div class="slide-body">
+      DOM en Línea es una plataforma nacional del MINVU que permite gestionar trámites
+      de obras de forma digital. Sin embargo, los ciudadanos enfrentan barreras
+      antes de llegar a ese portal.
+    </div>
+    <div class="cards-row" style="margin-top:28px;">
+      <div class="card">
+        <div class="card-icon">😕</div>
+        <div class="card-title">Desconocimiento</div>
+        <div class="card-desc">Los vecinos no saben qué documentos necesitan antes de ingresar</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚶</div>
+        <div class="card-title">Visitas presenciales</div>
+        <div class="card-desc">Deben venir a la municipalidad solo para consultar requisitos</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">❌</div>
+        <div class="card-title">Solicitudes incompletas</div>
+        <div class="card-desc">Ingresan sin datos del predio, sin rol SII, sin coordenadas</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">⏳</div>
+        <div class="card-title">Demoras evitables</div>
+        <div class="card-desc">Procesos que se alargan por antecedentes faltantes o incorrectos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 · LA IDEA -->
+  <div class="slide slide-split" id="slide-2">
+    <div>
+      <div class="kicker">La propuesta</div>
+      <div class="slide-title">Un puente entre el<br>ciudadano y <span class="hl">DOM en Línea</span></div>
+      <div class="slide-body">
+        Desarrollamos un <strong>portal municipal de orientación</strong> que guía al vecino
+        antes de ingresar al sistema oficial del MINVU. No reemplaza DOM en Línea —
+        lo complementa.
+      </div>
+      <div class="quote-box">
+        <div class="quote-text">
+          "El ciudadano llega preparado, con todos sus antecedentes listos,
+          y el trámite fluye sin interrupciones."
+        </div>
+        <div class="quote-src">— Objetivo del portal municipal</div>
+      </div>
+    </div>
+    <div>
+      <div class="solucion-box" style="margin-bottom:14px;">
+        <div class="box-title">✅ Qué ofrece el portal</div>
+        <ul class="box-list">
+          <li data-icon="📋">Listado de certificados con requisitos detallados</li>
+          <li data-icon="🗺">Mapa interactivo para ubicar el predio</li>
+          <li data-icon="📐">Deslinde del terreno con polígono</li>
+          <li data-icon="📄">Generación de formulario PDF prellenado</li>
+          <li data-icon="🎓">Guías, preguntas frecuentes y documentos de apoyo</li>
+        </ul>
+      </div>
+      <div class="problema-box">
+        <div class="box-title">🚫 Qué NO hace</div>
+        <ul class="box-list">
+          <li data-icon="—">No reemplaza DOM en Línea del MINVU</li>
+          <li data-icon="—">No almacena datos personales en servidores propios</li>
+          <li data-icon="—">No otorga ni tramita certificados</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 · FLUJO CIUDADANO -->
+  <div class="slide slide-center" id="slide-3">
+    <div class="kicker">Experiencia del usuario</div>
+    <div class="slide-title">El recorrido del <span class="hl">ciudadano</span></div>
+    <div class="slide-body">
+      Un proceso claro, paso a paso, que termina con el ciudadano listo para
+      ingresar su solicitud en la plataforma oficial del MINVU.
+    </div>
+    <div class="flow-row">
+      <div class="flow-node">
+        <div class="flow-num">PASO 1</div>
+        <div class="flow-label">Entra al<br>portal municipal</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node highlight">
+        <div class="flow-num">PASO 2</div>
+        <div class="flow-label">Identifica el<br>certificado que necesita</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node highlight">
+        <div class="flow-num">PASO 3</div>
+        <div class="flow-label">Ubica su predio<br>en el mapa</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node highlight">
+        <div class="flow-num">PASO 4</div>
+        <div class="flow-label">Completa datos<br>y descarga PDF</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node minvu">
+        <div class="flow-num">PASO 5</div>
+        <div class="flow-label">Ingresa en<br>DOM en Línea ✓</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-chip">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Pasos claros</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Datos almacenados</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Online, sin filas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 · CERTIFICADOS -->
+  <div class="slide slide-center" id="slide-4">
+    <div class="kicker">Módulo 1 — Orientación</div>
+    <div class="slide-title">Certificados y <span class="hl">requisitos</span></div>
+    <div class="slide-body">
+      Cada certificado tiene su ficha expandible con documentos requeridos,
+      plazo de respuesta y formulario descargable.
+    </div>
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-icon">🔢</div>
+        <div class="card-title">Certificado de Número</div>
+        <div class="card-desc">Acredita el número municipal asignado a una propiedad · 7 días hábiles</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Informaciones Previas</div>
+        <div class="card-desc">Información urbanística aplicable al predio · 7 días hábiles</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏛</div>
+        <div class="card-title">Afectación Utilidad Pública</div>
+        <div class="card-desc">Certifica si hay afectación según planificación vigente · 7 días hábiles</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏘</div>
+        <div class="card-title">Vivienda Social</div>
+        <div class="card-desc">Acredita antecedentes para fines de vivienda social · 7 días hábiles</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🗂</div>
+        <div class="card-title">Zonificación</div>
+        <div class="card-desc">Informa la zonificación aplicable al predio · 7 días hábiles</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 · MAPA INTERACTIVO -->
+  <div class="slide slide-split" id="slide-5">
+    <div>
+      <div class="kicker">Módulo 2 — Mapa interactivo</div>
+      <div class="slide-title">El predio en el <span class="hl">mapa</span></div>
+      <div class="slide-body">
+        El ciudadano busca su dirección o hace clic directamente en el mapa.
+        La plataforma captura automáticamente todos los datos de ubicación
+        y los transfiere al formulario.
+      </div>
+      <div class="detail-grid" style="grid-template-columns:1fr;">
+        <div class="detail-item green">
+          <div class="detail-label">🔍 Autocompletado</div>
+          <div class="detail-text">Calle, número, localidad y coordenadas se llenan solos al seleccionar el punto en el mapa</div>
+        </div>
+        <div class="detail-item green">
+          <div class="detail-label">📐 Deslinde del predio</div>
+          <div class="detail-text">Herramienta de polígono y rectángulo para demarcar los límites del terreno</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">📍 Coordenadas exactas</div>
+          <div class="detail-text">Latitud y longitud quedan registradas en el formulario PDF final</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-mock">
+      <div class="screen-bar">
+        <div class="screen-dot" style="background:#e74c3c"></div>
+        <div class="screen-dot" style="background:#f39c12"></div>
+        <div class="screen-dot" style="background:#27ae60"></div>
+        <div class="screen-url">portal.mdonihue.cl — Paso 1: Seleccionar ubicación</div>
+      </div>
+      <div class="screen-body">
+        <div class="screen-section">
+          <div class="screen-title">🗺 MAPA DEL PREDIO</div>
+          <div class="screen-map">
+            🌿
+            <div class="map-pin">📍</div>
+          </div>
+        </div>
+        <div class="screen-section">
+          <div class="screen-title">📍 COORDENADAS CAPTURADAS</div>
+          <div class="screen-row">
+            <div class="screen-chip active">Lat: -34.2334</div>
+            <div class="screen-chip active">Lng: -70.9671</div>
+            <div class="screen-chip active">✅ Ubicación confirmada</div>
+          </div>
+        </div>
+        <div class="screen-section">
+          <div class="screen-title">⬡ DESLINDES DEL PREDIO</div>
+          <div class="screen-row">
+            <div class="screen-chip">Polígono</div>
+            <div class="screen-chip">Rectángulo</div>
+            <div class="screen-chip active">Área: 450 m²</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 · FORMULARIO Y PDF -->
+  <div class="slide slide-split" id="slide-6">
+    <div>
+      <div class="kicker">Módulo 3 — Formulario y PDF</div>
+      <div class="slide-title">Formulario <span class="hl">prellenado</span><br>listo para ingresar</div>
+      <div class="slide-body">
+        Con los datos del mapa y los del solicitante, el sistema genera
+        automáticamente el <strong>formulario oficial del MINVU en PDF</strong>,
+        con todos los campos correctamente completados.
+      </div>
+      <div class="detail-grid" style="grid-template-columns:1fr;">
+        <div class="detail-item green">
+          <div class="detail-label">📄 PDF oficial MINVU</div>
+          <div class="detail-text">Usa la plantilla oficial del MINVU como base para el formulario generado</div>
+        </div>
+        <div class="detail-item green">
+          <div class="detail-label">🗺 Mapa integrado en el PDF</div>
+          <div class="detail-text">El mapa con la ubicación del predio queda incrustado dentro del documento</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">🖨 Descarga e impresión</div>
+          <div class="detail-text">El ciudadano descarga o imprime el formulario desde su celular o PC, sin instalar nada</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">🔐 Protección de datos</div>
+          <div class="detail-text">Consentimiento Ley N° 19.628 incluido en el PDF · datos no se almacenan en servidores</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-mock">
+      <div class="screen-bar">
+        <div class="screen-dot" style="background:#e74c3c"></div>
+        <div class="screen-dot" style="background:#f39c12"></div>
+        <div class="screen-dot" style="background:#27ae60"></div>
+        <div class="screen-url">portal.mdonihue.cl — Paso 2: Datos del solicitante</div>
+      </div>
+      <div class="screen-body">
+        <div class="screen-section">
+          <div class="screen-title">👤 DATOS DEL SOLICITANTE</div>
+          <div class="screen-form">
+            <div class="screen-field">Nombre: Juan Pérez González</div>
+            <div class="screen-field">RUT: 12.345.678-9</div>
+            <div class="screen-field">E-mail: juan@ejemplo.cl</div>
+            <div class="screen-field">Teléfono: 9 1234 5678</div>
+          </div>
+        </div>
+        <div class="screen-section">
+          <div class="screen-title">🏠 DATOS DEL PREDIO (AUTOCOMPLETADOS)</div>
+          <div class="screen-form">
+            <div class="screen-field" style="border-color:rgba(212,172,13,0.3);color:rgba(212,172,13,0.8)">Calle: Av. Estación</div>
+            <div class="screen-field" style="border-color:rgba(212,172,13,0.3);color:rgba(212,172,13,0.8)">Nro: 344</div>
+            <div class="screen-field" style="border-color:rgba(212,172,13,0.3);color:rgba(212,172,13,0.8)">Localidad: Doñihue</div>
+            <div class="screen-field">Rol SII: 234-56</div>
+          </div>
+        </div>
+        <div class="screen-btn">📄 Descargar formulario PDF</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 · TECNOLOGÍA -->
+  <div class="slide slide-center" id="slide-7">
+    <div class="kicker">Arquitectura técnica</div>
+    <div class="slide-title">Tecnología <span class="hl">simple y robusta</span></div>
+    <div class="slide-body">
+      El portal funciona como un sitio web estático. No requiere servidor propio,
+      base de datos ni infraestructura especial. Solo un hosting básico o
+      incluso GitHub Pages.
+    </div>
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <div class="card-title">HTML + CSS + JS</div>
+        <div class="card-desc">Sin frameworks complejos. Funciona en cualquier navegador, incluso móvil</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🗺</div>
+        <div class="card-title">Leaflet.js</div>
+        <div class="card-desc">Mapa interactivo open source con OpenStreetMap. Sin costos de API</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <div class="card-title">PDF-lib</div>
+        <div class="card-desc">Generación del PDF oficial directamente en el navegador del usuario</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <div class="card-title">JSON configurable</div>
+        <div class="card-desc">Un solo archivo de configuración para adaptar el portal a cualquier municipio</div>
+      </div>
+    </div>
+    <div class="quote-box">
+      <div class="quote-text">
+        Costo de infraestructura: <strong style="color:var(--dorado)">$0</strong> —
+        puede alojarse en GitHub Pages, Cloudflare Pages o cualquier hosting básico municipal.
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 · ESCALABILIDAD -->
+  <div class="slide slide-wide" id="slide-8">
+    <div class="kicker">Impacto potencial</div>
+    <div class="slide-title" style="font-size:34px;">Replicable en <span class="hl">todos los municipios</span> del país</div>
+    <div class="slide-body" style="max-width:100%;">
+      El diseño modular del portal permite adaptarlo a cualquier municipio de Chile
+      con solo modificar un archivo JSON. Sin tocar código.
+    </div>
+    <div class="escala-grid">
+      <div class="escala-card">
+        <div class="escala-icon">🏙</div>
+        <div class="escala-title">Configuración por municipio</div>
+        <div class="escala-desc">Nombre, logo, dirección, mapa centrado en la comuna, certificados propios y plazos locales</div>
+      </div>
+      <div class="escala-card">
+        <div class="escala-icon">📋</div>
+        <div class="escala-title">Certificados personalizables</div>
+        <div class="escala-desc">Cada municipio define qué certificados ofrece, sus requisitos y formularios</div>
+      </div>
+      <div class="escala-card">
+        <div class="escala-icon">🇨🇱</div>
+        <div class="escala-title">345 municipios</div>
+        <div class="escala-desc">Potencial de despliegue en todos los municipios del país con mínima adaptación</div>
+      </div>
+      <div class="escala-card">
+        <div class="escala-icon">🔗</div>
+        <div class="escala-title">Siempre apunta al MINVU</div>
+        <div class="escala-desc">El botón de acción principal siempre dirige a domenlinea.minvu.cl</div>
+      </div>
+      <div class="escala-card">
+        <div class="escala-icon">♿</div>
+        <div class="escala-title">Accesible</div>
+        <div class="escala-desc">Funciona en celulares, tablets y PC. Sin instalación ni registro</div>
+      </div>
+      <div class="escala-card">
+        <div class="escala-icon">🔄</div>
+        <div class="escala-title">Actualización centralizada</div>
+        <div class="escala-desc">Cualquier mejora al código beneficia a todos los municipios que lo usan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 · PROPUESTA AL MINVU -->
+  <div class="slide slide-split" id="slide-9">
+    <div>
+      <div class="section-pill">🏛 Propuesta formal</div>
+      <div class="slide-title">Lo que le<br>proponemos al <span class="hl-red">MINVU</span></div>
+      <div class="slide-body">
+        Presentamos este portal como un modelo de buenas prácticas
+        para que el MINVU lo adopte, mejore y distribuya entre
+        todas las DOM del país.
+      </div>
+    </div>
+    <div>
+      <div class="solucion-box" style="margin-bottom:14px;">
+        <div class="box-title">📌 Solicitudes al MINVU</div>
+        <ul class="box-list">
+          <li data-icon="1.">Adoptar el modelo como plantilla oficial para portales DOM municipales</li>
+          <li data-icon="2.">Incluir el portal en el kit de implementación de DOM en Línea</li>
+          <li data-icon="3.">Vincular oficialmente el portal al dominio domenlinea.minvu.cl</li>
+          <li data-icon="4.">Apoyo técnico para adaptar a los 345 municipios</li>
+          <li data-icon="5.">Reconocimiento a la municipalidad pionera en la propuesta</li>
+        </ul>
+      </div>
+      <div class="detail-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="detail-item green">
+          <div class="detail-label">🏆 Municipio piloto</div>
+          <div class="detail-text">Doñihue ya tiene el portal funcionando en producción</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">📅 Disponibilidad</div>
+          <div class="detail-text">Código fuente abierto, listo para revisión</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 · CIERRE -->
+  <div class="slide slide-center" id="slide-10">
+    <div class="portada-logo-row">
+      <div class="logo-badge gov">🏛</div>
+      <div class="logo-divider"></div>
+      <div class="logo-badge mun">🏗</div>
+    </div>
+    <div class="kicker">Conclusión</div>
+    <div class="portada-title" style="font-size:42px;">Un pequeño municipio,<br>una <span style="color:var(--dorado)">gran idea</span></div>
+    <div class="portada-sub" style="font-size:17px;max-width:640px;margin:0 auto 24px;">
+      La Municipalidad de Doñihue desarrolló esta solución con recursos propios,
+      orientada a mejorar la experiencia ciudadana y fortalecer el uso de
+      DOM en Línea en todo Chile.
+    </div>
+    <div class="stat-row">
+      <div class="stat-chip">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Costo de hosting</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-num">345</div>
+        <div class="stat-label">Municipios potenciales</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Alineado con MINVU</div>
+      </div>
+    </div>
+    <div style="margin-top:28px;font-size:13px;color:rgba(255,255,255,0.3);">
+      Dirección de Obras Municipales · I. Municipalidad de Doñihue · dom@mdonihue.cl · 72-2959202
+    </div>
+  </div>
+
+</div><!-- /slides -->
+
+<!-- BOTTOMBAR -->
+<div class="bottombar">
+  <div class="slide-info" id="slide-info">Slide 1 de 11</div>
+  <div class="dots" id="dots"></div>
+  <div class="nav-group">
+    <button class="btn-n" id="btn-prev" onclick="prev()" disabled>← Anterior</button>
+    <button class="btn-n" id="btn-full" onclick="toggleFull()" title="Pantalla completa">⛶</button>
+    <button class="btn-n primary" id="btn-next" onclick="next()">Siguiente →</button>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 11;
+  let cur = 0;
+
+  // Partículas
+  const pc = document.getElementById('particles');
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement('div');
+    p.classList.add('prt');
+    const s = Math.random() * 70 + 20;
+    p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;
+      animation-duration:${Math.random()*18+14}s;animation-delay:${Math.random()*-18}s;`;
+    pc.appendChild(p);
+  }
+
+  // Dots
+  function buildDots() {
+    const el = document.getElementById('dots');
+    el.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.createElement('div');
+      d.classList.add('dot');
+      if (i === cur) d.classList.add('active');
+      d.onclick = () => go(i);
+      el.appendChild(d);
+    }
+  }
+
+  function go(n) {
+    document.getElementById(`slide-${cur}`).classList.remove('active');
+    cur = Math.max(0, Math.min(n, TOTAL - 1));
+    document.getElementById(`slide-${cur}`).classList.add('active');
+    update();
+  }
+
+  function next() { if (cur < TOTAL-1) go(cur+1); }
+  function prev() { if (cur > 0)       go(cur-1); }
+
+  function update() {
+    document.getElementById('btn-prev').disabled = cur === 0;
+    document.getElementById('btn-next').disabled = cur === TOTAL-1;
+    document.getElementById('slide-info').textContent = `Slide ${cur+1} de ${TOTAL}`;
+    document.getElementById('slide-counter').textContent = `${cur+1} / ${TOTAL}`;
+    document.getElementById('progress-fill').style.width = (cur/(TOTAL-1)*100) + '%';
+    buildDots();
+  }
+
+  function toggleFull() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); prev(); }
+    if (e.key === 'f' || e.key === 'F') toggleFull();
+  });
+
+  buildDots();
+  update();
+</script>
+</body>
+</html>
