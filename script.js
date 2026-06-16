@@ -673,29 +673,42 @@ async function buscarDireccionEnMapa() {
     return;
   }
 
-  const consulta = construirConsultaDireccion(direccion);
-  const url = construirUrlBusquedaMapa(consulta);
+  const zoomBusqueda = obtenerConfigDom("zoomBusqueda", 17);
 
+  /* Intento 1: búsqueda con contexto de comuna y región */
+  const consulta = construirConsultaDireccion(direccion);
+  let resultado = await ejecutarBusquedaNominatim(construirUrlBusquedaMapa(consulta));
+
+  /* Intento 2: si no encuentra, busca solo con el texto libre en Chile */
+  if (!resultado) {
+    const params = new URLSearchParams({
+      format: "jsonv2", limit: "1", addressdetails: "1",
+      "accept-language": "es", q: direccion, countrycodes: "cl"
+    });
+    resultado = await ejecutarBusquedaNominatim(
+      `https://nominatim.openstreetmap.org/search?${params.toString()}`
+    );
+  }
+
+  if (!resultado) {
+    alert("No se encontró la dirección. Intente escribirla de otra forma o marque el punto manualmente en el mapa.");
+    return;
+  }
+
+  const lat = parseFloat(resultado.lat);
+  const lng = parseFloat(resultado.lon);
+  mapaPredio.setView([lat, lng], zoomBusqueda);
+  actualizarUbicacionPredio(lat, lng, "Dirección encontrada");
+  autocompletarDireccionFormulario(resultado.address || {}, direccion);
+}
+
+async function ejecutarBusquedaNominatim(url) {
   try {
     const respuesta = await fetch(url);
     const datos = await respuesta.json();
-
-    if (!datos || datos.length === 0) {
-      alert("No se encontró la dirección. Intente escribirla de otra forma o marque el punto manualmente en el mapa.");
-      return;
-    }
-
-    const resultado = datos[0];
-    const lat = parseFloat(resultado.lat);
-    const lng = parseFloat(resultado.lon);
-    const zoomBusqueda = obtenerConfigDom("zoomBusqueda", 17);
-
-    mapaPredio.setView([lat, lng], zoomBusqueda);
-    actualizarUbicacionPredio(lat, lng, "Dirección encontrada");
-    autocompletarDireccionFormulario(resultado.address || {}, direccion);
-  } catch (error) {
-    console.error(error);
-    alert("No se pudo buscar la dirección. Revise la conexión a internet o marque el punto manualmente.");
+    return (datos && datos.length > 0) ? datos[0] : null;
+  } catch {
+    return null;
   }
 }
 
