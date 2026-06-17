@@ -344,6 +344,11 @@ img {
   flex-wrap: wrap;
 }
 
+.section-heading > div {
+  flex: 1;
+  min-width: 0;
+}
+
 .section-heading.inside {
   margin-bottom: 16px;
 }
@@ -352,7 +357,7 @@ img {
   margin-top: 8px;
   font-size: 0.95rem;
   color: var(--text-secondary, #5a6a85);
-  max-width: 620px;
+  max-width: 100%;
 }
 
 .section-kicker {
