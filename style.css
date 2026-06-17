@@ -348,6 +348,13 @@ img {
   margin-bottom: 16px;
 }
 
+.section-desc {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--text-secondary, #5a6a85);
+  max-width: 620px;
+}
+
 .section-kicker {
   display: inline-block;
   margin-bottom: 8px;

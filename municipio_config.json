@@ -68,7 +68,7 @@
 
   "mapa": {
    
-    "comunaBusqueda": "Paredones",
+    "comunaBusqueda": "Doñihue",
     "regionBusqueda": "Región del Libertador General Bernardo O'Higgins",    
     "paisBusqueda": "Chile",
     "codigoPais": "cl",
@@ -87,7 +87,7 @@
       "_info": "Lista de certificados disponibles. Cada objeto genera una tarjeta expandible en la página.",
       "_campos": "nombre(*), plazo(*), descripcion(*), documentos(*): lista de documentos requeridos, formulario: ruta al PDF del formulario (opcional).",
       "nombre": "Certificado de Número",
-      "plazo": "hasta 20 días hábiles",
+      "plazo": "Plazo Referencial: 7 días",
       "descripcion": "Acredita el número municipal asignado a una propiedad.",
       "documentos": [
         "Rol de avalúo",
@@ -99,7 +99,7 @@
     },
     {
       "nombre": "Certificado de Informaciones Previas",
-      "plazo": "7 días hábiles",
+      "plazo": "Plazo Referencial: 7 días ",
       "descripcion": "Entrega información urbanística aplicable a un predio.",
       "documentos": [
         "Rol de avalúo",
@@ -112,7 +112,7 @@
     },
     {
       "nombre": "Certificado de Afectación a Utilidad Pública",
-      "plazo": "hasta 20 días hábiles",
+      "plazo": "Plazo Referencial: 7 días ",
       "descripcion": "Certifica si una propiedad se encuentra afecta a utilidad pública según la planificación vigente.",
       "documentos": [
         "Rol de avalúo",
@@ -124,7 +124,7 @@
     },
     {
       "nombre": "Certificado de Vivienda Social",
-      "plazo": "hasta 20 días hábiles",
+      "plazo": "Plazo Referencial: 7 días  ",
       "descripcion": "Permite acreditar antecedentes para fines asociados a vivienda social.",
       "documentos": [
         "Rol",
@@ -136,7 +136,7 @@
     },
     {
       "nombre": "Certificado de Zonificación",
-      "plazo": "hasta 20 días hábiles",
+      "plazo": "Plazo Referencial: 7 días ",
       "descripcion": "Informa la zonificación aplicable a un predio.",
       "documentos": [
         "Rol",
@@ -149,7 +149,7 @@
     },
     {
       "nombre": "Otro",
-      "plazo": "Según revisión",
+      "plazo": "Plazo Referencial: 7 días ",
       "descripcion": "Corresponde a solicitudes especiales no listadas explícitamente.",
       "documentos": [
         "Antecedentes según solicitud"
