@@ -286,7 +286,7 @@
   },
 
   "consentimiento": {
-    "textoConsentimiento": "Autorizo a {municipalidad} a tratar mis datos personales ({datos}) con el fin exclusivo de gestionar esta solicitud. Este sitio utiliza servicios externos de geolocalización (OpenStreetMap y Google Maps) que procesan las coordenadas del predio; dichos datos no son almacenados en servidores municipales. Conforme a la",
+    "textoConsentimiento": "Autorizo a {municipalidad} a tratar los siguientes datos personales con el fin exclusivo de gestionar esta solicitud:",
     "datosPersonales": [
       "nombre completo",
       "RUT",
@@ -299,6 +299,6 @@
     "textoLinkLey": "Ley N° 19.628 de Protección de Datos Personales y sus modificaciones (Ley N° 21.719, 2024)",
     "requerido": true,
     "registrarEnPdf": true,
-    "avisoPreparacion": "PREPARACION — Este PDF no es comprobante de ingreso. Tramite oficial en: domenlinea.minvu.cl. Plazos referenciales sujetos a revision municipal."
+    "avisoPreparacion": "AVISO — Este PDF no es comprobante de ingreso. El trámite oficial debe realizarse en domenlinea.minvu.cl. Los plazos indicados son referenciales y están sujetos a revisión municipal."
   }
 }

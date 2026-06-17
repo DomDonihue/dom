@@ -1269,6 +1269,15 @@ img {
   text-decoration: underline;
 }
 
+.consent-datos-list {
+  margin: 6px 0 6px 16px;
+  padding: 0;
+  list-style: disc;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #5a6a85);
+  line-height: 1.7;
+}
+
 #numero[readonly] {
   background: #f1f5f9;
   color: #334155;

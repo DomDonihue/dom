@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($content = Get-Content \"c:\\\\Users\\\\DOM\\\\OneDrive - Ilustre Municipalidad de Doñihue\\\\Escritorio\\\\DOM_FORMULARIO\\\\municipio_config.json\" -Raw; try { $null = $content | ConvertFrom-Json; Write-Output \"JSON válido\" } catch { Write-Output \"Error: $_\" })"
+    ]
+  }
+}

@@ -1635,13 +1635,13 @@ function inicializarConsentimiento() {
   if (!cfg.textoConsentimiento) return;
 
   const municipalidad = obtenerConfigDom("municipalidadCompleta", "la Municipalidad");
-  const datos = Array.isArray(cfg.datosPersonales) && cfg.datosPersonales.length
-    ? cfg.datosPersonales.join(" y ")
-    : "datos personales";
+
+  const listaHtml = Array.isArray(cfg.datosPersonales) && cfg.datosPersonales.length
+    ? `<ul class="consent-datos-list">${cfg.datosPersonales.map(d => `<li>${escaparHtml(d)}</li>`).join("")}</ul>`
+    : "";
 
   const texto = cfg.textoConsentimiento
-    .replace("{municipalidad}", escaparHtml(municipalidad))
-    .replace("{datos}", escaparHtml(datos));
+    .replace("{municipalidad}", escaparHtml(municipalidad));
 
   const linkHref  = escaparHtml(cfg.linkLey    || "#");
   const linkTexto = escaparHtml(cfg.textoLinkLey || "normativa vigente");
@@ -1652,6 +1652,7 @@ function inicializarConsentimiento() {
         <input type="checkbox" id="consentimientoDatos">
         <span>
           ${texto}
+          ${listaHtml}
           <a href="${linkHref}" target="_blank" rel="noopener">${linkTexto}</a>.
         </span>
       </label>
