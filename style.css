@@ -1501,3 +1501,240 @@ img {
   margin-top: 0.5rem;
   margin-bottom: 0;
 }
+
+/* ================================================================
+   MÓDULO CERTIFICADO DE NÚMERO
+================================================================ */
+.cn-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .cn-layout { grid-template-columns: 1fr; }
+}
+
+.cn-panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 26px;
+}
+
+.cn-panel-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.cn-panel-desc {
+  font-size: 0.87rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+  line-height: 1.55;
+}
+
+.cn-panel-desc code {
+  background: var(--blue-soft);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+}
+
+.cn-search-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.cn-search-row .cn-input {
+  flex: 1;
+}
+
+.cn-input {
+  width: 100%;
+  border: 1px solid #dbe3ef;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  color: var(--text);
+  background: #fff;
+  font-family: inherit;
+}
+
+.cn-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(47,118,234,0.12);
+}
+
+/* Status bar */
+.cn-status {
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.cn-status-ok    { background: #ecfdf5; color: #166534; border: 1px solid #bbf7d0; }
+.cn-status-warn  { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+.cn-status-info  { background: var(--blue-soft); color: var(--primary); border: 1px solid #bfdbfe; }
+.cn-status-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* Resultados */
+.cn-resultados {
+  min-height: 60px;
+}
+
+.cn-resultado-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cn-resultado-header small {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.cn-verif-badge {
+  background: #ecfdf5;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.cn-lista-resultados {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.cn-resultado-item {
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  background: #fff;
+}
+
+.cn-resultado-item:hover {
+  border-color: var(--accent);
+  background: var(--blue-soft);
+}
+
+.cn-resultado-item.cn-seleccionado {
+  border-color: #16a34a;
+  background: #f0fdf4;
+}
+
+.cn-resultado-primero {
+  border-color: var(--accent);
+}
+
+.cn-resultado-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.cn-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.cn-chip-fecha   { background: #eff6ff; color: #1d4ed8; }
+.cn-chip-materia { background: #f3e8ff; color: #6b21a8; }
+.cn-chip-rol     { background: #fff7ed; color: #c2410c; }
+
+.cn-resultado-nombre {
+  font-weight: 700;
+  font-size: 0.93rem;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.cn-resultado-dir {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.cn-resultado-rec {
+  font-size: 0.78rem;
+  color: #16a34a;
+  margin-top: 2px;
+}
+
+.cn-sin-resultado {
+  text-align: center;
+  padding: 28px 16px;
+  color: var(--muted);
+}
+
+.cn-sin-icono {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.cn-sin-resultado p {
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* Formulario solicitante */
+.cn-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.cn-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cn-form-group label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.cn-full {
+  grid-column: 1 / -1;
+}
+
+.cn-acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.cn-aviso-legal {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
