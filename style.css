@@ -170,7 +170,7 @@ img {
       rgba(15, 60, 104, 0.4) 70%,
       rgba(15, 60, 104, 0.2) 100%
     ),
-    url("img/hero.png");
+    url("img/hero.png?v=2");
   background-size: cover;
   background-position: center 55%;
   background-repeat: no-repeat;
