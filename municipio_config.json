@@ -30,7 +30,7 @@
     "region": "DEL LIBERTADOR GENERAL BERNARDO O'HIGGINS",
     "regionCompleta": "Región del Libertador General Bernardo O'Higgins",
     "logotipo": "./img/logomuni.png",
-    "heroImagen": "./img/hero.png",    
+    "heroImagen": "./img/hero.jpg",    
 
     "contacto": {
       "_info": "Datos de contacto que aparecen en el pie de página.",
