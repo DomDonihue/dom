@@ -35,7 +35,6 @@
       <a href="#inicio">Inicio</a>
       <a href="#beneficios">Información</a>
       <a href="#certificados">Certificados</a>
-      <a href="#certificado-numero">Certificado de N°</a>
       <a href="#preparar-solicitud">Preparar solicitud</a>
       <a href="#documentos">Documentos</a>
       <a href="#faq">Preguntas frecuentes</a>
@@ -114,98 +113,6 @@
     <div class="accordion" id="certificadosAccordion"></div>
   </div>
 </section>
- <!-- CERTIFICADO DE NÚMERO -->
-<section class="section" id="certificado-numero">
-  <div class="container">
-    <div class="section-heading">
-      <div>
-        <span class="section-kicker">Servicio digital DOM</span>
-        <h2>Certificado de Número</h2>
-        <p class="section-desc">Ingresa el ROL SII, nombre del propietario o dirección del predio. Si existe en nuestra base de datos histórica, el certificado se genera al instante. Si no, tu solicitud se envía directamente a los profesionales de la DOM.</p>
-      </div>
-    </div>
-
-    <div class="cn-layout">
-
-      <!-- Panel búsqueda -->
-      <div class="cn-panel cn-panel-busqueda">
-        <h3 class="cn-panel-title">🔍 Buscar predio en la Matriz DOM</h3>
-        <p class="cn-panel-desc">Puedes buscar por ROL (ej: <code>117-95</code>), nombre del propietario o parte de la dirección.</p>
-
-        <div class="cn-search-row">
-          <input type="text" id="cn-busqueda" class="cn-input" placeholder="Ej: 117-95  |  González  |  Cachapoal" autocomplete="off">
-          <button id="cn-btn-buscar" class="btn btn-accent">Buscar</button>
-        </div>
-
-        <div id="cn-status" class="cn-status" style="display:none"></div>
-        <div id="cn-resultados" class="cn-resultados"></div>
-      </div>
-
-      <!-- Panel datos del solicitante -->
-      <div class="cn-panel cn-panel-form">
-        <h3 class="cn-panel-title">📋 Datos del solicitante y predio</h3>
-        <p class="cn-panel-desc">Completa los datos para el certificado. Si tu predio fue encontrado arriba, estos campos complementan la información.</p>
-
-        <div id="cn-form-solicitante" class="cn-form-grid">
-          <div class="cn-form-group cn-full">
-            <label>Nombre completo del solicitante <span class="campo-requerido">*</span></label>
-            <input type="text" id="cn-nombre" class="cn-input" placeholder="Ej: Juan González Pérez">
-          </div>
-          <div class="cn-form-group">
-            <label>Teléfono</label>
-            <input type="text" id="cn-telefono" class="cn-input" placeholder="9 1234 5678">
-          </div>
-          <div class="cn-form-group">
-            <label>Correo electrónico</label>
-            <input type="email" id="cn-email" class="cn-input" placeholder="correo@ejemplo.cl">
-          </div>
-          <div class="cn-form-group">
-            <label>ROL SII</label>
-            <input type="text" id="cn-rol" class="cn-input" placeholder="Ej: 117-95">
-          </div>
-          <div class="cn-form-group">
-            <label>Zona</label>
-            <select id="cn-zona" class="cn-input">
-              <option value="urbano">Urbano</option>
-              <option value="rural">Rural</option>
-            </select>
-          </div>
-          <div class="cn-form-group cn-full">
-            <label>Dirección del predio <span class="campo-requerido">*</span></label>
-            <input type="text" id="cn-direccion" class="cn-input" placeholder="Ej: Calle Cachapoal N° 123">
-          </div>
-          <div class="cn-form-group">
-            <label>Manzana</label>
-            <input type="text" id="cn-manzana" class="cn-input" placeholder="Opcional">
-          </div>
-          <div class="cn-form-group">
-            <label>Lote</label>
-            <input type="text" id="cn-lote" class="cn-input" placeholder="Opcional">
-          </div>
-          <div class="cn-form-group cn-full">
-            <label>Localidad o loteo</label>
-            <input type="text" id="cn-localidad" class="cn-input" value="Doñihue" placeholder="Doñihue">
-          </div>
-        </div>
-
-        <div class="cn-acciones">
-          <button id="cn-btn-generar" class="btn btn-accent" disabled>
-            📄 Generar certificado
-          </button>
-          <button id="cn-btn-correo" class="btn btn-outline" style="display:none">
-            ✉ Derivar a DOM
-          </button>
-        </div>
-
-        <p class="cn-aviso-legal">
-          ⚠ El certificado generado es referencial. Para su validez oficial debe ser firmado y timbrado por el Director de Obras Municipales de la I. Municipalidad de Doñihue.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
  <!-- FORMULARIO DE SOLICITUD -->
 <section class="section" id="preparar-solicitud">
   <div class="container">
@@ -547,7 +454,6 @@
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 <script src="script.js"></script>
-<script src="cn_module.js"></script>
 
 </body>
 </html>
