@@ -25,8 +25,8 @@
 
   "municipalidad": {
    
-    "nombre": "DOÑIHUE",
-    "nombreCompleto": "Ilustre Municipalidad de Doñihue",
+    "nombre": "Navidad",
+    "nombreCompleto": "Ilustre Municipalidad de Navidad",
     "region": "DEL LIBERTADOR GENERAL BERNARDO O'HIGGINS",
     "regionCompleta": "Región del Libertador General Bernardo O'Higgins",
     "logotipo": "./img/logomuni.png",
@@ -90,10 +90,9 @@
       "plazo": "Plazo Referencial: 7 días",
       "descripcion": "Acredita el número municipal asignado a una propiedad.",
       "documentos": [
-        "Rol de avalúo",
-        "Croquis de ubicación",
-        "Dominio Vigente",
-        "Copia Escritura"
+        "Dominio Vigente o copia escritura",
+        "Plano escritura",
+        "KMZ (foto aerea del predio)"
       ],
       "formulario": "./img/Doc/cn.pdf"
     },
@@ -102,11 +101,9 @@
       "plazo": "Plazo Referencial: 7 días ",
       "descripcion": "Entrega información urbanística aplicable a un predio.",
       "documentos": [
-        "Rol de avalúo",
-        "Croquis",
-        "Poder simple si corresponde",
-        "Dominio Vigente",
-        "Copia Escritura"
+       "Dominio Vigente o copia escritura",
+        "Plano escritura",
+        "KMZ (foto aerea del predio)"
       ],
       "formulario": "./img/Doc/cip.pdf"
     },
@@ -115,10 +112,9 @@
       "plazo": "Plazo Referencial: 7 días ",
       "descripcion": "Certifica si una propiedad se encuentra afecta a utilidad pública según la planificación vigente.",
       "documentos": [
-        "Rol de avalúo",
-        "Croquis de ubicación",
-        "Dominio Vigente",
-        "Copia Escritura"
+       "Dominio Vigente o copia escritura",
+        "Plano escritura",
+        "KMZ (foto aerea del predio)"
       ],
       "formulario": "./img/Doc/cup.pdf"
     },
@@ -127,10 +123,9 @@
       "plazo": "Plazo Referencial: 7 días  ",
       "descripcion": "Permite acreditar antecedentes para fines asociados a vivienda social.",
       "documentos": [
-        "Rol",
-        "Antecedentes de la propiedad",
-        "Dominio Vigente",
-        "Copia Escritura"
+       "Dominio Vigente o copia escritura",
+        "Plano escritura",
+        "KMZ (foto aerea del predio)"
       ],
       "formulario": "./img/Doc/formulario.pdf"
     },
@@ -139,11 +134,9 @@
       "plazo": "Plazo Referencial: 7 días ",
       "descripcion": "Informa la zonificación aplicable a un predio.",
       "documentos": [
-        "Rol",
-        "Dirección",
-        "Croquis",
-        "Dominio Vigente",
-        "Copia Escritura"
+       "Dominio Vigente o copia escritura",
+        "Plano escritura",
+        "KMZ (foto aerea del predio)"
       ],
       "formulario": "./img/Doc/formulario.pdf"
     },
@@ -152,7 +145,10 @@
       "plazo": "Plazo Referencial: 7 días ",
       "descripcion": "Corresponde a solicitudes especiales no listadas explícitamente.",
       "documentos": [
-        "Antecedentes según solicitud"
+        "Dominio Vigente o copia escritura",
+        "Plano escritura",
+        "KMZ (foto aerea del predio)",
+        "Carta inficando el certificado que necesita"
       ],
       "formulario": "./img/Doc/formulario.pdf"
     }
