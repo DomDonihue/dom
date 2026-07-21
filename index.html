@@ -301,6 +301,11 @@
           <button type="button" class="btn btn-outline" id="btnImprimirPdf" disabled>
             Imprimir formulario
           </button>
+
+          <button type="button" class="btn btn-outline" id="btnMostrarQR" disabled
+            title="Genera un QR para que el ciudadano continúe el formulario desde su celular">
+            📱 Continuar en celular (QR)
+          </button>
         </div>
       </form>
     </div>
@@ -453,7 +458,145 @@
 
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
+<!-- QR Code para continuar en celular -->
+
 <script src="script.js"></script>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  QR — Continuar en celular
+// ════════════════════════════════════════════════════════
+
+// ── 1. Pre-llenado al llegar desde un QR ─────────────────
+(function() {
+  const p = new URLSearchParams(window.location.search);
+  if (!p.has('calle') && !p.has('rol')) return;
+
+  function setVal(id, val) {
+    if (!val) return;
+    const el = document.getElementById(id);
+    if (el) { el.value = val; el.dispatchEvent(new Event('input')); }
+  }
+
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      // Datos personales
+      setVal('nombre',    p.get('nombre'));
+      setVal('rut',       p.get('rut'));
+      setVal('email',     p.get('email'));
+      setVal('telefono',  p.get('tel'));
+      // Datos del predio
+      setVal('zona',      p.get('zona'));
+      setVal('calle',     p.get('calle'));
+      setVal('numero',    p.get('num'));
+      setVal('depto',     p.get('depto'));
+      setVal('block',     p.get('block'));
+      setVal('manzana',   p.get('manzana'));
+      setVal('lote',      p.get('lote'));
+      setVal('localidad', p.get('localidad'));
+      setVal('planoLoteo',p.get('plano'));
+      setVal('rolSii',    p.get('rol'));
+      setVal('latitud',   p.get('lat'));
+      setVal('longitud',  p.get('lng'));
+
+      // Banner azul informativo
+      const b = document.createElement('div');
+      b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a5276;color:#fff;text-align:center;padding:14px 20px;font-size:14px;font-family:sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.3);';
+      b.innerHTML = '📋 <strong>Formulario pre-llenado</strong> con los datos ingresados en la municipalidad. Revisa, completa y genera el PDF final. <button onclick="this.parentNode.remove()" style="margin-left:16px;background:#fff;color:#1a5276;border:none;border-radius:4px;padding:4px 12px;cursor:pointer;font-weight:bold;">Entendido ✓</button>';
+      document.body.prepend(b);
+
+      // Scroll al formulario
+      const form = document.getElementById('formulario');
+      if (form) setTimeout(() => form.scrollIntoView({behavior:'smooth'}), 400);
+    }, 900);
+  });
+})();
+
+// ── 2. Botón "Continuar en celular (QR)" ─────────────────
+window.addEventListener('load', function() {
+  const btn = document.getElementById('btnMostrarQR');
+  if (!btn) return;
+
+  // Habilitar junto con los botones PDF
+  const pdfBtn = document.getElementById('btnGenerarPdf');
+  if (pdfBtn) {
+    new MutationObserver(function() {
+      if (!pdfBtn.disabled) btn.disabled = false;
+    }).observe(pdfBtn, { attributes: true, attributeFilter: ['disabled'] });
+  }
+
+  btn.addEventListener('click', function() {
+    function v(id) { const e = document.getElementById(id); return e ? e.value.trim() : ''; }
+
+    // Solo datos del PREDIO en el QR (no datos personales — privacidad)
+    const base = window.location.origin + window.location.pathname;
+    const params = new URLSearchParams();
+    if (v('zona'))       params.set('zona',      v('zona'));
+    if (v('calle'))      params.set('calle',     v('calle'));
+    if (v('numero'))     params.set('num',       v('numero'));
+    if (v('depto'))      params.set('depto',     v('depto'));
+    if (v('block'))      params.set('block',     v('block'));
+    if (v('manzana'))    params.set('manzana',   v('manzana'));
+    if (v('lote'))       params.set('lote',      v('lote'));
+    if (v('localidad'))  params.set('localidad', v('localidad'));
+    if (v('planoLoteo')) params.set('plano',     v('planoLoteo'));
+    if (v('rolSii'))     params.set('rol',       v('rolSii'));
+    if (v('latitud'))    params.set('lat',       v('latitud'));
+    if (v('longitud'))   params.set('lng',       v('longitud'));
+    const url = base + '?' + params.toString() + '#formulario';
+
+    // Mostrar modal
+    function mostrarModal(qrDiv) {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;';
+      const card = document.createElement('div');
+      card.style.cssText = 'background:#fff;border-radius:16px;padding:28px 32px;max-width:400px;width:92%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.4);';
+      card.innerHTML = '<h3 style="margin:0 0 6px;color:#1a5276;font-size:19px;">📱 Continuar en celular</h3>'
+        + '<p style="color:#666;font-size:13px;margin:0 0 18px;">El ciudadano escanea este código con la cámara.<br>El formulario se abrirá con la dirección y el rol ya ingresados.</p>';
+      card.appendChild(qrDiv);
+      const info = document.createElement('div');
+      info.style.cssText = 'margin-top:14px;background:#eaf4fb;border-radius:8px;padding:10px 14px;font-size:12px;color:#1a5276;text-align:left;line-height:1.6;';
+      info.innerHTML = '<strong>El ciudadano solo deberá:</strong><br>✅ Ingresar sus datos personales (nombre, RUT, email)<br>✅ Adjuntar sus documentos desde la galería o cámara<br>✅ Generar y descargar el PDF final';
+      card.appendChild(info);
+      const cerrar = document.createElement('button');
+      cerrar.textContent = 'Cerrar';
+      cerrar.style.cssText = 'margin-top:18px;background:#1a5276;color:#fff;border:none;border-radius:8px;padding:10px 30px;font-size:14px;cursor:pointer;';
+      cerrar.onclick = () => overlay.remove();
+      card.appendChild(cerrar);
+      overlay.appendChild(card);
+      overlay.addEventListener('click', e => { if (e.target===overlay) overlay.remove(); });
+      document.body.appendChild(overlay);
+    }
+
+    // Cargar qrcodejs dinámicamente si no está cargado
+    function generarQR() {
+      const div = document.createElement('div');
+      div.style.cssText = 'display:inline-block;padding:8px;background:#fff;border:2px solid #1a5276;border-radius:8px;';
+      new QRCode(div, {
+        text: url,
+        width: 240,
+        height: 240,
+        colorDark: '#1a5276',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      mostrarModal(div);
+    }
+
+    if (typeof QRCode !== 'undefined') {
+      generarQR();
+    } else {
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      s.onload = generarQR;
+      s.onerror = function() {
+        alert('No se pudo cargar el generador de QR. Verifica la conexión a internet.');
+      };
+      document.head.appendChild(s);
+    }
+  });
+});
+</script>
 
 </body>
 </html>
