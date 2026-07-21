@@ -34,10 +34,10 @@
 
     "contacto": {
       "_info": "Datos de contacto que aparecen en el pie de página.",
-      "direccion": "Av. Estación #344",
-      "telefono": "72-2959202",
-      "email": "dom@mdonihue.cl",
-      "sitioWeb": "https://www.mdonihue.cl"
+      "direccion": "Juan montes s/n",
+      "telefono": "+56 44 357 9509",
+      "email": "Dom@muninavidad.cl",
+      "sitioWeb": "hhttps://www.muninavidad.cl/"
      
     }
   },
@@ -68,17 +68,17 @@
 
   "mapa": {
    
-    "comunaBusqueda": "Doñihue",
+    "comunaBusqueda": "Navidad",
     "regionBusqueda": "Región del Libertador General Bernardo O'Higgins",    
     "paisBusqueda": "Chile",
     "codigoPais": "cl",
 
-    "centroMapa": [-34.233333, -70.966667],    
-    "zoomInicial": 14,    
-    "zoomBusqueda": 17, 
-    "viewboxBusqueda": "-71.0500,-34.1600,-70.8800,-34.3100",  
-    "boundedBusqueda": false,   
-    "localidadPredeterminada": "Doñihue",
+    "centroMapa": [-33.953604, -71.830577],
+    "zoomInicial": 14,
+    "zoomBusqueda": 17,
+    "viewboxBusqueda": "-71.9441,-33.9037,-71.6921,-34.1109",
+    "boundedBusqueda": false,
+    "localidadPredeterminada": "Navidad",
     "zonaPredeterminada": ""
   },
 
