@@ -1,8 +1,0 @@
-{
-    "claudeCodeChat.permissions.yoloMode": false,
-    "files.exclude": {
-        ".claude": true,
-        ".vscode": true
-    },
-    "liveServer.settings.port": 5501
-}
