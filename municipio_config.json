@@ -73,7 +73,7 @@
       "_campos": "nombre(*), plazo(*), descripcion(*), documentos(*): lista de documentos requeridos, formulario: ruta al PDF del formulario (opcional).",
       "nombre": "Certificado de Número",
       "plazo": "Plazo Referencial: 7 días",
-      "descripcion": "Acredita el número municipal asignado a una propiedad.",
+      "descripcion": "Acredita el número municipal asignado a una propiedad. Valor: $2.106.",
       "documentos": [
         "Dominio Vigente o copia escritura",
         "Plano escritura",
@@ -84,7 +84,7 @@
     {
       "nombre": "Certificado de Informaciones Previas",
       "plazo": "Plazo Referencial: 7 días ",
-      "descripcion": "Entrega información urbanística aplicable a un predio.",
+      "descripcion": "Entrega información urbanística aplicable a un predio. Valor: $6.318.",
       "documentos": [
        "Dominio Vigente o copia escritura",
         "Plano escritura",
@@ -95,7 +95,7 @@
     {
       "nombre": "Certificado de Afectación a Utilidad Pública",
       "plazo": "Plazo Referencial: 7 días ",
-      "descripcion": "Certifica si una propiedad se encuentra afecta a utilidad pública según la planificación vigente.",
+      "descripcion": "Certifica si una propiedad se encuentra afecta a utilidad pública según la planificación vigente. Valor: $2.106.",
       "documentos": [
        "Dominio Vigente o copia escritura",
         "Plano escritura",
@@ -106,7 +106,7 @@
     {
       "nombre": "Certificado de Vivienda Social",
       "plazo": "Plazo Referencial: 7 días  ",
-      "descripcion": "Permite acreditar antecedentes para fines asociados a vivienda social.",
+      "descripcion": "Permite acreditar antecedentes para fines asociados a vivienda social. Valor: $2.106.",
       "documentos": [
        "Dominio Vigente o copia escritura",
         "Plano escritura",
@@ -117,7 +117,7 @@
     {
       "nombre": "Certificado de Zonificación",
       "plazo": "Plazo Referencial: 7 días ",
-      "descripcion": "Informa la zonificación aplicable a un predio.",
+      "descripcion": "Informa la zonificación aplicable a un predio. Valor: $2.106.",
       "documentos": [
        "Dominio Vigente o copia escritura",
         "Plano escritura",
@@ -128,7 +128,7 @@
     {
       "nombre": "Otro",
       "plazo": "Plazo Referencial: 7 días ",
-      "descripcion": "Corresponde a solicitudes especiales no listadas explícitamente.",
+      "descripcion": "Corresponde a solicitudes especiales no listadas explícitamente. Valor: $2.106.",
       "documentos": [
         "Dominio Vigente o copia escritura",
         "Plano escritura",
