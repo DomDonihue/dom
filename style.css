@@ -353,6 +353,13 @@ img {
   margin-bottom: 16px;
 }
 
+.section-desc {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--text-secondary, #5a6a85);
+  max-width: 100%;
+}
+
 .section-kicker {
   display: inline-block;
   margin-bottom: 8px;
@@ -555,6 +562,118 @@ img {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+/* FORMULARIO PREPARAR SOLICITUD */
+.solicitud-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items:stretch;
+}
+
+.solicitud-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid #edf1f7;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  height: 100%;
+}
+.solicitud-card:has(#mapaPredio) {
+  overflow: hidden;
+}
+
+.solicitud-card h3 {
+  margin: 0 0 16px;
+  color: var(--primary);
+  font-size: 1.35rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.form-group {
+  display: grid;
+  gap: 7px;
+}
+
+.form-group label {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.form-group input,
+.form-group select,
+.map-search input {
+  width: 100%;
+  border: 1px solid #dbe3ef;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 0.96rem;
+  outline: none;
+  background: #fff;
+  color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.map-search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(47, 118, 234, 0.12);
+}
+
+.form-help {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+.map-search {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+#mapaPredio {
+  width: 100%;
+  height: 520px;
+  min-height: 480px;
+  position: relative;
+  display: block;
+  flex: none;
+  border-radius: 10px;
+  border: 1px solid #dbe3ef;
+  overflow: hidden;
+  background: #eef3f8;
+  z-index: 1;
+}
+
+.coordenadas-box {
+  margin-top: 14px;
+  background: #f8fbff;
+  border: 1px solid #dbe7f8;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.coordenadas-box strong {
+  color: var(--primary);
+}
+
+.coordenadas-box p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.form-actions {
+  margin-top: 10px;
 }
 
 /* MINI CARDS */
@@ -897,7 +1016,8 @@ img {
   .faq-grid,
   .cards-3,
   .mini-cards,
-  .accordion-grid {
+  .accordion-grid,
+  .solicitud-grid {
     grid-template-columns: 1fr;
   }
 
@@ -990,6 +1110,87 @@ img {
     padding: 0 16px 16px;
   }
 
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .map-search {
+    grid-template-columns: 1fr;
+  }
+
+  #mapaPredio {
+    height: 340px;
+  }
+}
+
+/* FLUJO MAPA PRIMERO */
+.flujo-pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 18px;
+}
+
+.flujo-paso {
+  background: #ffffff;
+  border: 1px solid #dbe7f8;
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: var(--muted);
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 8px 22px rgba(24, 33, 61, 0.05);
+}
+
+.flujo-paso.activo {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+}
+
+.flujo-paso.completado {
+  color: var(--primary);
+  background: #eef7ff;
+  border-color: #b9d5ff;
+}
+
+.solicitud-grid-flujo {
+  align-items: start;
+}
+
+.paso-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.estado-flujo {
+  margin-top: 10px !important;
+  font-weight: 700;
+}
+
+.estado-flujo.pendiente {
+  color: #a05a00;
+}
+
+.estado-flujo.listo {
+  color: #0f6b45;
+}
+
+.aviso-autocompletado {
+  background: #f8fbff;
+  border: 1px solid #dbe7f8;
+  border-radius: 12px;
+  padding: 10px 12px;
 }
 
 .btn:disabled,
@@ -1011,6 +1212,295 @@ img {
   color: var(--blue);
 }
 
+.formulario-solicitud {
+  scroll-margin-top: 100px;
+}
+
+@media (max-width: 720px) {
+  .flujo-pasos {
+    grid-template-columns: 1fr;
+  }
+}
+/* OPCIÓN SIN NÚMERO */
+.check-sn {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  color: var(--muted) !important;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.check-sn input {
+  width: auto !important;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+/* CONSENTIMIENTO DATOS PERSONALES */
+.consent-group {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-top: 8px;
+}
+
+.consent-label {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 400 !important;
+  color: var(--text) !important;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.consent-label input[type="checkbox"] {
+  width: auto !important;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+  width: 16px !important;
+  height: 16px;
+  cursor: pointer;
+}
+
+.consent-label a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.consent-datos-list {
+  margin: 6px 0 6px 16px;
+  padding: 0;
+  list-style: disc;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #5a6a85);
+  line-height: 1.7;
+}
+
+#numero[readonly] {
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 700;
+}
+
+/* LÍMITES DEL PREDIO */
+.limites-box {
+  background: #fff8f1;
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 14px;
+}
+
+.limites-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.limites-icon {
+  font-size: 1.1rem;
+  color: #e63946;
+}
+
+.limites-header strong {
+  flex: 1;
+  color: var(--primary);
+  font-size: 0.93rem;
+}
+
+.limites-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.limites-badge.sin-limites {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+.limites-badge.con-limites {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.limites-ayuda {
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.limites-info {
+  font-size: 0.83rem;
+  color: #166534;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin: 8px 0 6px;
+}
+
+.limites-info-pendiente {
+  font-size: 0.83rem;
+  color: #94a3b8;
+  margin: 6px 0 0;
+  font-style: italic;
+}
+
+/* Mini-mapa de previsualización de deslindes */
+.limites-minimap-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  margin: 10px 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.limites-minimap {
+  width: 100%;
+  height: 240px;
+  border-radius: 8px;
+  border: 2px solid #fca5a5;
+  overflow: hidden;
+}
+
+/* Botón pequeño extra */
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  min-height: 32px;
+}
+
+/* ZONA DETECTADA AUTOMÁTICAMENTE */
+.zona-detectada-panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 0.87rem;
+  font-weight: 500;
+}
+
+.zona-detectada-panel.zona-urbana {
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  color: #1d4ed8;
+}
+
+.zona-detectada-panel.zona-rural {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  color: #166534;
+}
+
+.zona-detectada-panel span { font-size: 1.1rem; }
+
+/* SELECTOR URBANO / RURAL INLINE (bajo el mapa) */
+.zona-selector-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.zona-selector-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0369a1;
+  flex-shrink: 0;
+}
+
+.zona-inline-btn {
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.zona-inline-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #eff6ff;
+}
+
+.zona-inline-btn.zona-inline-activa {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(47,118,234,0.28);
+}
+
+/* Botón mover mapa en barra Leaflet.draw */
+.leaflet-mover-btn {
+  font-size: 1rem !important;
+  line-height: 26px !important;
+}
+
+.leaflet-mover-btn.mover-activo {
+  background: #e0edff !important;
+}
+
+/* Control de capas Leaflet en modo compacto */
+.leaflet-control-layers-expanded {
+  font-size: 0.82rem;
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 8px;
+}
+
+.leaflet-draw-toolbar a {
+  border-radius: 4px !important;
+}
+
+/* Mapa grande ancho completo */
+#mapaPredio {
+  height: 520px !important;
+  min-height: 480px;
+  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+  width: 100%;
+}
+
+.campo-requerido {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.leyenda-requerido {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
 
 /* ================================================================
    MÓDULO CERTIFICADO DE NÚMERO

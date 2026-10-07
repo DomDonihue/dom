@@ -35,6 +35,7 @@
       <a href="#inicio">Inicio</a>
       <a href="#beneficios">Información</a>
       <a href="#certificados">Certificados</a>
+      <a href="#preparar-solicitud">Preparar solicitud</a>
       <a href="#documentos">Documentos</a>
       <a href="#faq">Preguntas frecuentes</a>
       <a href="#contacto">Contacto</a>
@@ -112,6 +113,201 @@
     <div class="accordion" id="certificadosAccordion"></div>
   </div>
 </section>
+ <!-- FORMULARIO DE SOLICITUD -->
+<section class="section" id="preparar-solicitud">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="section-kicker">Asistente ciudadano</span>
+        <h2>Preparar solicitud paso a paso</h2>
+        <p class="section-desc">Este formulario corresponde al <strong>Certificado de Informaciones Previas (CIP)</strong>, documento oficial que entrega las normas urbanísticas aplicables a un predio.</p>
+      </div>
+    </div>
+
+    <div class="flujo-pasos">
+      <div class="flujo-paso activo" id="pasoUbicacion">1. Seleccionar ubicación</div>
+      <div class="flujo-paso" id="pasoFormulario">2. Completar datos</div>
+      <div class="flujo-paso" id="pasoPdf">3. Descargar PDF</div>
+    </div>
+
+    <div class="solicitud-grid solicitud-grid-flujo">
+      <div class="solicitud-card solicitud-card-principal" id="tarjetaUbicacion">
+        <span class="paso-etiqueta">Paso 1</span>
+        <h3>Ubicación del predio</h3>
+        <p class="form-help">
+          Primero busca la dirección o marca el punto directamente en el mapa. Con esta información se completarán automáticamente la calle, número, localidad y coordenadas del formulario.
+        </p>
+
+        <div class="map-search">
+          <input type="text" id="buscarDireccion" placeholder="Ej: Ingresa una dirección, calle o camino" />
+          <button type="button" class="btn btn-accent" id="btnBuscarMapa">
+            Buscar
+          </button>
+        </div>
+
+        <div id="mapaPredio"></div>
+
+        <div class="coordenadas-box">
+          <strong>Coordenadas seleccionadas:</strong>
+          <p id="coordenadasTexto">Aún no se ha seleccionado una ubicación.</p>
+          <p id="estadoUbicacion" class="estado-flujo pendiente">Seleccione una ubicación para continuar con el formulario.</p>
+
+        </div>
+
+        <div class="limites-box" id="limitesBox">
+          <div class="limites-header">
+            <span class="limites-icon">⬡</span>
+            <strong>Deslindes del predio</strong>
+            <span class="limites-badge sin-limites" id="limitesBadge">Sin demarcar</span>
+          </div>
+          <p class="limites-ayuda">Use la herramienta <strong>Polígono</strong> o <strong>Rectángulo</strong> de la barra lateral del mapa para demarcar los deslindes del predio.</p>
+
+          <!-- Mini-mapa de previsualización de deslindes -->
+          <div id="limitesMiniMapaWrap" style="display:none">
+            <div class="limites-minimap-label">
+              <span>📐</span> Vista previa de deslindes demarcados
+            </div>
+            <div id="limitesMiniMapa" class="limites-minimap"></div>
+            <p id="limitesTexto" class="limites-info"></p>
+          </div>
+
+          <div class="limites-footer" id="limitesSinDemarcar">
+            <p id="limitesTextoPendiente" class="limites-info-pendiente">Aún no se han demarcado los deslindes en el mapa.</p>
+          </div>
+
+          <button type="button" class="btn btn-outline btn-sm" id="btnLimpiarLimites" style="display:none">
+            🗑 Borrar deslindes
+          </button>
+        </div>
+
+        <input type="hidden" id="limitesPropiedad">
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" id="btnConfirmarUbicacion">
+            Usar esta ubicación y completar datos
+          </button>
+        </div>
+      </div>
+
+      <form id="solicitudForm" class="solicitud-card formulario-solicitud">
+        <span class="paso-etiqueta">Paso 2</span>
+        
+        <h3>Datos del solicitante</h3>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nombre completo <span class="campo-requerido">*</span></label>
+            <input type="text" id="nombre" placeholder="Ej: Juan Pérez González">
+          </div>
+
+          <div class="form-group">
+            <label>RUT <span class="campo-requerido">*</span></label>
+            <input type="text" id="rut" placeholder="Ej: 12.345.678-9">
+          </div>
+
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="email" placeholder="correo@ejemplo.cl">
+          </div>
+
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="text" id="telefono" placeholder="Ej:  9 1234 5678">
+          </div>
+        </div>
+
+        <h3>Datos de la propiedad</h3>
+        <p class="form-help aviso-autocompletado">
+          Estos datos se completan desde el mapa. Revísalos y corrige manualmente si la dirección no queda exacta.
+        </p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Tipo de zona</label>
+            <select id="zona">
+              <option value="">Seleccionar</option>
+              <option value="urbano">Urbano</option>
+              <option value="rural">Rural</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Calle o camino <span class="campo-requerido">*</span></label>
+            <input type="text" id="calle" placeholder="Se completará desde el mapa">
+          </div>
+
+          <div class="form-group">
+            <label>Número <span class="campo-requerido">*</span></label>
+            <input type="text" id="numero" placeholder="Se completará si el mapa lo encuentra">
+
+            <label class="check-sn">
+            <input type="checkbox" id="sinNumero">
+                  Predio sin número / S.N.
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>Departamento</label>
+            <input type="text" id="depto" placeholder="Opcional">
+          </div>
+
+          <div class="form-group">
+            <label>Block</label>
+            <input type="text" id="block" placeholder="Opcional">
+          </div>
+
+          <div class="form-group">
+            <label>Manzana</label>
+            <input type="text" id="manzana" placeholder="Opcional">
+          </div>
+
+          <div class="form-group">
+            <label>Lote</label>
+            <input type="text" id="lote" placeholder="Opcional">
+          </div>
+
+          <div class="form-group">
+            <label>Loteo o localidad</label>
+            <input type="text" id="localidad" placeholder="Se completará desde el mapa">
+          </div>
+
+          <div class="form-group">
+            <label>Plano de loteo N°</label>
+            <input type="text" id="planoLoteo" placeholder="Opcional">
+          </div>
+
+          <div class="form-group">
+            <label>Rol SII <span class="campo-requerido">*</span></label>
+            <input type="text" id="rolSii" placeholder="Ej: 123-45" required>
+          </div>
+        </div>
+
+        <p class="leyenda-requerido"><span class="campo-requerido">*</span> Campos obligatorios</p>
+
+        <input type="hidden" id="latitud">
+        <input type="hidden" id="longitud">
+
+        <div id="consentimientoContainer"></div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-accent" id="btnGuardarDatos" disabled>
+            Validar datos
+          </button>
+
+          <button type="button" class="btn btn-accent" id="btnGenerarPdf" disabled>
+            Descargar formulario PDF
+          </button>
+
+          <button type="button" class="btn btn-outline" id="btnImprimirPdf" disabled>
+            Imprimir formulario
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+
   <!-- DOCUMENTOS  DE APOYO-->
   <section class="section" id="documentos">
     <div class="container mini-cards">

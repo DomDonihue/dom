@@ -66,6 +66,20 @@
     ]
   },
 
+  "mapa": {
+    "comunaBusqueda": "Doñihue",
+    "regionBusqueda": "Región del Libertador General Bernardo O'Higgins",
+    "paisBusqueda": "Chile",
+    "codigoPais": "cl",
+
+    "centroMapa": [-34.233333, -70.966667],
+    "zoomInicial": 14,
+    "zoomBusqueda": 17,
+    "viewboxBusqueda": "-71.0500,-34.1600,-70.8800,-34.3100",
+    "boundedBusqueda": false,
+    "localidadPredeterminada": "Doñihue",
+    "zonaPredeterminada": ""
+  },
 
   "certificados": [
     {
